@@ -1,11 +1,11 @@
 "use client";
 
 /**
- * EngineeringJourney.tsx — v2
+ * EngineeringJourney.tsx — Light Theme Conversion (#FAFAF7 / #F5F5F3)
  *
  * Full-bleed, scroll-driven sequence for the engineering background.
- * Textured #0B0B0E background, abstract high-contrast line-diagram motifs,
- * signature left throughline drawing down on scroll, and numbered indices 01/02/03.
+ * Light theme background (#FAFAF7), dark text (#0A0A0B), mid-gray labels (#6B6B6B),
+ * abstract SVG motifs, and signature left throughline.
  */
 
 import { useRef } from "react";
@@ -38,7 +38,7 @@ const PHASES: Phase[] = [
       "Supervised DCS and PLC logic across heavy energy infrastructure",
       "Maintained UPS units, transformers, and rotating machinery on critical circuits",
     ],
-    accent: "#F0A345",
+    accent: "#D97706", // Amber / Industrial Orange accent
     motif: "grid",
   },
   {
@@ -55,7 +55,7 @@ const PHASES: Phase[] = [
       "Maintained automated production lines (blistering, counting) under strict SOPs",
       "Ran physicochemical quality checks (pH, conductivity) against pharmacopeia standards",
     ],
-    accent: "#3FC7B0",
+    accent: "#0D9488", // Clinical Teal accent
     motif: "pharma",
   },
   {
@@ -72,7 +72,7 @@ const PHASES: Phase[] = [
       "Studied matrix converters and thermal sensors for offshore wind-to-hydrogen systems",
       "Wind Energy & Green Hydrogen certification — University of Rostock (Prof. Uwe Ritschel)",
     ],
-    accent: "#8B7CF6",
+    accent: "#6E56CF", // Electric Indigo accent
     motif: "hydrogen",
   },
 ];
@@ -90,33 +90,33 @@ export default function EngineeringJourney() {
       ref={sectionRef}
       id="journey"
       aria-label="Engineering background and journey"
-      className="relative overflow-hidden bg-[#0B0B0E]"
+      className="relative overflow-hidden bg-[#FAFAF7] border-t border-borderColor"
     >
-      {/* textured background — matches Experiments section, no flat black */}
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_15%_10%,rgba(240,163,69,0.08),transparent_40%),radial-gradient(circle_at_85%_60%,rgba(139,124,246,0.1),transparent_40%)]" />
+      {/* textured background — warm light theme grid */}
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_15%_10%,rgba(217,119,6,0.05),transparent_40%),radial-gradient(circle_at_85%_60%,rgba(110,86,207,0.06),transparent_40%)]" />
       <div
-        className="pointer-events-none absolute inset-0 opacity-[0.12]"
+        className="pointer-events-none absolute inset-0 opacity-[0.05]"
         style={{
           backgroundImage:
-            "radial-gradient(circle, rgba(255,255,255,0.5) 1px, transparent 1px)",
+            "radial-gradient(circle, rgba(10,10,11,0.5) 1px, transparent 1px)",
           backgroundSize: "28px 28px",
         }}
       />
 
       <div className="relative px-6 pt-28 pb-8 md:px-16 max-w-7xl mx-auto">
-        <p className="font-mono text-xs tracking-[0.25em] text-white/40 font-tnum">
+        <p className="font-mono text-xs tracking-[0.25em] text-[#6B6B6B] font-tnum">
           CHAPTER · 04 // ENGINEERING BACKGROUND
         </p>
-        <h2 className="mt-4 max-w-2xl text-4xl font-bold leading-[1.05] tracking-tight text-white md:text-6xl font-display">
+        <h2 className="mt-4 max-w-2xl text-4xl font-bold leading-[1.05] tracking-tight text-[#0A0A0B] md:text-6xl font-display">
           Before the AI systems, there was the physical infrastructure.
         </h2>
       </div>
 
       {/* signature throughline — draws down as you scroll the whole section */}
-      <div className="pointer-events-none absolute left-8 top-0 hidden h-full w-px bg-white/10 md:left-16 md:block">
+      <div className="pointer-events-none absolute left-8 top-0 hidden h-full w-px bg-[#0A0A0B]/10 md:left-16 md:block">
         <motion.div
           style={{ height: lineHeight }}
-          className="w-px bg-gradient-to-b from-[#F0A345] via-[#3FC7B0] to-[#8B7CF6]"
+          className="w-px bg-gradient-to-b from-[#D97706] via-[#0D9488] to-[#6E56CF]"
         />
       </div>
 
@@ -141,7 +141,7 @@ function PhaseSection({ phase }: { phase: Phase }) {
   return (
     <div
       ref={ref}
-      className="relative flex min-h-[90vh] items-center overflow-hidden border-t border-white/5 pl-8 pr-6 md:pl-24 md:pr-16 max-w-7xl mx-auto"
+      className="relative flex min-h-[90vh] items-center overflow-hidden border-t border-[#0A0A0B]/10 pl-8 pr-6 md:pl-24 md:pr-16 max-w-7xl mx-auto"
     >
       <motion.div style={{ y: motifY }} className="pointer-events-none absolute inset-0">
         {phase.motif === "grid" && <GridMotif accent={phase.accent} />}
@@ -149,28 +149,28 @@ function PhaseSection({ phase }: { phase: Phase }) {
         {phase.motif === "hydrogen" && <TurbineMotif accent={phase.accent} />}
       </motion.div>
 
-      <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-[#0B0B0E] via-[#0B0B0E]/75 to-[#0B0B0E]/10" />
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-[#FAFAF7] via-[#FAFAF7]/85 to-[#FAFAF7]/20" />
 
       <motion.div style={{ opacity: copyOpacity, y: copyY }} className="relative z-10 max-w-xl">
         <div className="flex items-baseline gap-4">
           <span
-            className="font-mono text-6xl font-bold leading-none opacity-30 font-tnum"
+            className="font-mono text-6xl font-bold leading-none opacity-25 font-tnum"
             style={{ color: phase.accent }}
           >
             {phase.index}
           </span>
-          <span className="font-mono text-xs tracking-[0.25em] text-white/50">
+          <span className="font-mono text-xs tracking-[0.25em] text-[#6B6B6B]">
             {phase.eyebrow}
           </span>
         </div>
 
-        <h3 className="mt-4 text-3xl font-bold leading-tight text-white md:text-5xl font-display">
+        <h3 className="mt-4 text-3xl font-bold leading-tight text-[#0A0A0B] md:text-5xl font-display">
           {phase.role}
         </h3>
-        <p className="mt-3 text-sm text-white/50">
+        <p className="mt-3 text-sm text-[#6B6B6B] font-medium">
           {phase.org} · {phase.years}
         </p>
-        <p className="mt-5 text-base leading-relaxed text-white/70 leading-relaxed font-sans">{phase.summary}</p>
+        <p className="mt-5 text-base leading-relaxed text-[#333333] font-sans font-normal">{phase.summary}</p>
 
         <ul className="mt-6 space-y-3">
           {phase.details.map((d, i) => (
@@ -180,13 +180,13 @@ function PhaseSection({ phase }: { phase: Phase }) {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true, margin: "-10%" }}
               transition={{ delay: i * 0.08, duration: 0.4 }}
-              className="flex items-start gap-3 text-sm text-white/60 font-sans"
+              className="flex items-start gap-3 text-sm text-[#4A4A4A] font-sans"
             >
               <span
                 className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full"
                 style={{ backgroundColor: phase.accent }}
               />
-              {d}
+              <span>{d}</span>
             </motion.li>
           ))}
         </ul>
@@ -196,12 +196,12 @@ function PhaseSection({ phase }: { phase: Phase }) {
 }
 
 /* ---------------------------------------------------------------------- */
-/* Motifs — abstract, bigger, high-contrast. No literal clipart icons.    */
+/* Motifs — light-theme compliant SVG line art diagrams                   */
 /* ---------------------------------------------------------------------- */
 
 function GridMotif({ accent }: { accent: string }) {
   return (
-    <svg viewBox="0 0 1200 800" className="h-full w-full opacity-70" preserveAspectRatio="xMidYMid slice">
+    <svg viewBox="0 0 1200 800" className="h-full w-full opacity-40" preserveAspectRatio="xMidYMid slice">
       {Array.from({ length: 6 }).map((_, i) => (
         <line
           key={`v${i}`}
@@ -222,10 +222,9 @@ function GridMotif({ accent }: { accent: string }) {
         strokeLinecap="round"
         strokeLinejoin="round"
         initial={{ pathLength: 0, opacity: 0 }}
-        whileInView={{ pathLength: 1, opacity: 0.9 }}
+        whileInView={{ pathLength: 1, opacity: 0.8 }}
         viewport={{ once: true }}
         transition={{ duration: 1.6, ease: "easeInOut" }}
-        style={{ filter: `drop-shadow(0 0 8px ${accent})` }}
       />
       <motion.circle
         cx="770"
@@ -234,7 +233,6 @@ function GridMotif({ accent }: { accent: string }) {
         fill={accent}
         animate={{ opacity: [0.4, 1, 0.4], scale: [1, 1.3, 1] }}
         transition={{ duration: 1.4, repeat: Infinity }}
-        style={{ filter: `drop-shadow(0 0 10px ${accent})` }}
       />
     </svg>
   );
@@ -242,7 +240,7 @@ function GridMotif({ accent }: { accent: string }) {
 
 function VialMotif({ accent }: { accent: string }) {
   return (
-    <svg viewBox="0 0 1200 800" className="h-full w-full opacity-70" preserveAspectRatio="xMidYMid slice">
+    <svg viewBox="0 0 1200 800" className="h-full w-full opacity-40" preserveAspectRatio="xMidYMid slice">
       <rect
         x="780"
         y="220"
@@ -252,7 +250,7 @@ function VialMotif({ accent }: { accent: string }) {
         fill="none"
         stroke={accent}
         strokeWidth="2"
-        opacity="0.5"
+        opacity="0.4"
       />
       <clipPath id="vialClip">
         <rect x="784" y="224" width="132" height="332" rx="14" />
@@ -261,7 +259,7 @@ function VialMotif({ accent }: { accent: string }) {
         x="784"
         width="132"
         fill={accent}
-        opacity="0.25"
+        opacity="0.2"
         clipPath="url(#vialClip)"
         initial={{ y: 556, height: 0 }}
         whileInView={{ y: 340, height: 216 }}
@@ -296,23 +294,23 @@ function VialMotif({ accent }: { accent: string }) {
 
 function TurbineMotif({ accent }: { accent: string }) {
   return (
-    <svg viewBox="0 0 1200 800" className="h-full w-full opacity-70" preserveAspectRatio="xMidYMid slice">
+    <svg viewBox="0 0 1200 800" className="h-full w-full opacity-40" preserveAspectRatio="xMidYMid slice">
       <g transform="translate(820,420)">
-        <line x1="0" y1="0" x2="0" y2="220" stroke={accent} strokeWidth="2" opacity="0.5" />
+        <line x1="0" y1="0" x2="0" y2="220" stroke={accent} strokeWidth="2" opacity="0.4" />
         <motion.g
           animate={{ rotate: 360 }}
           transition={{ duration: 7, repeat: Infinity, ease: "linear" }}
           style={{ originX: "0px", originY: "0px" }}
         >
-          <line x1="0" y1="0" x2="0" y2="-110" stroke={accent} strokeWidth="3" strokeLinecap="round" opacity="0.8" />
-          <line x1="0" y1="0" x2="95" y2="55" stroke={accent} strokeWidth="3" strokeLinecap="round" opacity="0.8" />
-          <line x1="0" y1="0" x2="-95" y2="55" stroke={accent} strokeWidth="3" strokeLinecap="round" opacity="0.8" />
+          <line x1="0" y1="0" x2="0" y2="-110" stroke={accent} strokeWidth="3" strokeLinecap="round" opacity="0.7" />
+          <line x1="0" y1="0" x2="95" y2="55" stroke={accent} strokeWidth="3" strokeLinecap="round" opacity="0.7" />
+          <line x1="0" y1="0" x2="-95" y2="55" stroke={accent} strokeWidth="3" strokeLinecap="round" opacity="0.7" />
         </motion.g>
         <circle r="8" fill={accent} />
       </g>
 
       <g transform="translate(300,300)">
-        <ellipse cx="0" cy="0" rx="90" ry="34" stroke={accent} strokeWidth="1.5" fill="none" opacity="0.4" />
+        <ellipse cx="0" cy="0" rx="90" ry="34" stroke={accent} strokeWidth="1.5" fill="none" opacity="0.3" />
         <motion.circle
           r="6"
           fill={accent}
@@ -320,7 +318,7 @@ function TurbineMotif({ accent }: { accent: string }) {
           transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
           style={{ offsetPath: "path('M -90 0 A 90 34 0 1 1 90 0 A 90 34 0 1 1 -90 0')" }}
         />
-        <circle r="14" fill={accent} opacity="0.9" />
+        <circle r="14" fill={accent} opacity="0.8" />
       </g>
     </svg>
   );
