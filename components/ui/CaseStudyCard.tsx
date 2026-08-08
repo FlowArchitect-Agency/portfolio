@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
-import { ArrowRight, Layers } from 'lucide-react';
+import { ArrowRight, ExternalLink, Globe } from 'lucide-react';
 import { Project } from '@/lib/projects-data';
 
 export default function CaseStudyCard({ project, index }: { project: Project; index: number }) {
@@ -64,9 +64,23 @@ export default function CaseStudyCard({ project, index }: { project: Project; in
         </div>
       </div>
 
-      {/* Footer Link */}
-      <div className="mt-8 pt-6 border-t border-borderColor flex items-center justify-between font-mono text-xs">
-        <span className="text-textMuted uppercase tracking-wider">FULL CASE STUDY</span>
+      {/* Footer Link & Action Buttons */}
+      <div className="mt-8 pt-6 border-t border-borderColor flex flex-wrap items-center justify-between gap-3 font-mono text-xs">
+        {project.liveDemoUrl ? (
+          <a
+            href={project.liveDemoUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 bg-accent text-white px-4 py-2.5 rounded-lg font-semibold hover:opacity-90 transition-opacity shadow-sm"
+          >
+            <Globe className="w-4 h-4" />
+            <span>OPEN LIVE DEMO</span>
+            <ExternalLink className="w-3.5 h-3.5" />
+          </a>
+        ) : (
+          <span className="text-textMuted uppercase tracking-wider">FULL CASE STUDY</span>
+        )}
+
         <Link
           href={`/work/${project.slug}`}
           className="inline-flex items-center gap-2 text-textPrimary font-semibold hover:text-accent transition-colors group/link"
