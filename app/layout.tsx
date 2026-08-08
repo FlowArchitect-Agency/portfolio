@@ -3,11 +3,13 @@ import './globals.css';
 import { ThemeProvider } from '@/components/ui/ThemeProvider';
 import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
+import GlowingCursor from '@/components/ui/GlowingCursor';
+import ParallaxBackground from '@/components/ui/ParallaxBackground';
 
 export const metadata: Metadata = {
-  title: 'Mehdi Mechkak — Applied AI Engineer',
-  description: 'Personal portfolio of Mehdi Mechkak, Applied AI Engineer based in Paris, France. Specializing in RAG, AI automation & data systems.',
-  keywords: ['Mehdi Mechkak', 'Applied AI Engineer', 'Paris AI Engineer', 'RAG', 'Python', 'FastAPI', 'Airflow', 'AWS', 'FlowArchitect-Agency'],
+  title: 'Mehdi Mechkak — Applied AI Engineer & Data Architect',
+  description: 'Personal portfolio of Mehdi Mechkak, Applied AI Engineer & Data Architect based in Paris, France. Transitioned from High-Voltage SCADA Electrical Engineering to RAG, AI automation & cloud systems.',
+  keywords: ['Mehdi Mechkak', 'Applied AI Engineer', 'Paris AI Engineer', 'RAG', 'Python', 'FastAPI', 'Airflow', 'AWS', 'SCADA', 'Electrical Engineering'],
   authors: [{ name: 'Mehdi Mechkak' }],
 };
 
@@ -28,8 +30,10 @@ export default function RootLayout({
       </head>
       <body className="bg-background text-textPrimary antialiased selection:bg-accent selection:text-white">
         <ThemeProvider>
+          <GlowingCursor />
+          <ParallaxBackground />
           <Navbar />
-          <div className="min-h-screen">{children}</div>
+          <div className="min-h-screen relative z-10">{children}</div>
           <Footer />
         </ThemeProvider>
       </body>
