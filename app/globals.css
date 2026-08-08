@@ -5,16 +5,16 @@
 @layer base {
   :root, [data-theme="dark"] {
     --bg-background: #0A0A0B;
-    --bg-surface: #131316;
-    --bg-surface-elevated: #1A1A1F;
+    --bg-surface: #121215;
+    --bg-surface-elevated: #18181C;
     --border-color: rgba(255, 255, 255, 0.08);
     --border-color-hover: rgba(255, 255, 255, 0.16);
     --text-primary: #F5F5F3;
     --text-secondary: rgba(245, 245, 243, 0.62);
     --text-muted: rgba(245, 245, 243, 0.40);
     --color-accent: #6E56CF;
-    --color-accent-soft: rgba(110, 86, 207, 0.12);
-    --color-accent-glow: rgba(110, 86, 207, 0.25);
+    --color-accent-soft: rgba(110, 86, 207, 0.10);
+    --color-accent-glow: rgba(110, 86, 207, 0.20);
   }
 
   [data-theme="light"] {
@@ -27,8 +27,8 @@
     --text-secondary: rgba(10, 10, 11, 0.62);
     --text-muted: rgba(10, 10, 11, 0.42);
     --color-accent: #6E56CF;
-    --color-accent-soft: rgba(110, 86, 207, 0.10);
-    --color-accent-glow: rgba(110, 86, 207, 0.20);
+    --color-accent-soft: rgba(110, 86, 207, 0.08);
+    --color-accent-glow: rgba(110, 86, 207, 0.16);
   }
 }
 
@@ -36,7 +36,7 @@ html {
   background-color: var(--bg-background);
   color: var(--text-primary);
   font-family: 'Inter', system-ui, sans-serif;
-  transition: background-color 0.2s ease, color 0.2s ease;
+  transition: background-color 0.25s ease, color 0.25s ease;
   scroll-behavior: smooth;
 }
 
@@ -50,12 +50,6 @@ body {
 .font-tnum {
   font-feature-settings: "tnum" 1;
   font-variant-numeric: tabular-nums;
-}
-
-/* Technical dotted pattern */
-.bg-tech-dots {
-  background-size: 24px 24px;
-  background-image: radial-gradient(circle, var(--border-color) 1px, transparent 1px);
 }
 
 /* Custom scrollbar */

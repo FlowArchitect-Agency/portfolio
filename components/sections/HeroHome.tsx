@@ -1,7 +1,8 @@
 'use client';
 
 import Link from 'next/link';
-import StylizedAvatar from '../ui/StylizedAvatar';
+import MagneticButton from '../ui/MagneticButton';
+import ScrollReveal from '../ui/ScrollReveal';
 import { DESIGN_TOKENS } from '@/lib/design-tokens';
 import { ArrowRight, ArrowDown } from 'lucide-react';
 
@@ -9,53 +10,50 @@ export default function HeroHome() {
   const { author } = DESIGN_TOKENS;
 
   return (
-    <section className="pt-36 pb-20 md:py-32 px-6 md:px-12 max-w-7xl mx-auto space-y-8">
-      {/* Avatar & Location Badge */}
-      <div className="flex flex-wrap items-center gap-6">
-        <StylizedAvatar size="lg" />
-        <div className="space-y-1 font-mono text-xs text-textMuted">
-          <div className="inline-flex items-center gap-2 bg-surface border border-borderColor px-3 py-1.5 rounded-full text-textSecondary font-medium">
-            <span className="w-2 h-2 rounded-full bg-accent animate-pulse" />
-            <span>AVAILABLE FOR HIGH-IMPACT AI ROLES</span>
+    <section className="pt-40 pb-24 md:pt-48 md:pb-36 px-8 md:px-16 max-w-7xl mx-auto space-y-12">
+      <ScrollReveal delay={0.1}>
+        <div className="space-y-6 max-w-4xl">
+          {/* Main Title: ✦ Mehdi. / Applied AI Engineer. */}
+          <h1 className="font-display font-extrabold text-5xl sm:text-7xl md:text-8xl tracking-tight text-textPrimary leading-[1.02]">
+            <span className="text-accent">✦</span> {author.name}.<br />
+            <span className="text-textSecondary font-bold">{author.title}.</span>
+          </h1>
+
+          <p className="font-sans text-xl sm:text-2xl md:text-3xl text-textSecondary font-normal leading-relaxed pt-2">
+            Specializing in <span className="text-textPrimary font-semibold">{author.specialty}</span>.
+          </p>
+
+          {/* Verbatim Bio POV Quote */}
+          <div className="p-6 md:p-8 bg-surface border-l-2 border-accent border-y border-r border-borderColor rounded-r-2xl font-sans text-lg sm:text-xl text-textPrimary leading-relaxed my-8 font-medium shadow-sm">
+            &ldquo;{author.bioPOV}&rdquo;
           </div>
-          <div>{author.location}</div>
         </div>
-      </div>
+      </ScrollReveal>
 
-      {/* Main Title & Subtitle */}
-      <div className="space-y-4 max-w-4xl">
-        <h1 className="font-display font-extrabold text-4xl sm:text-6xl md:text-7xl lg:text-8xl tracking-tight text-textPrimary leading-[1.05]">
-          {author.name}.<br />
-          <span className="text-textSecondary font-bold">{author.title}.</span>
-        </h1>
+      {/* Magnetic CTAs */}
+      <ScrollReveal delay={0.25}>
+        <div className="flex flex-wrap items-center gap-5 pt-4">
+          <MagneticButton strength={0.2}>
+            <Link
+              href="/work"
+              className="inline-flex items-center gap-3 bg-textPrimary text-background font-sans font-semibold text-sm px-8 py-4 rounded-xl hover:opacity-90 transition-all duration-200 shadow-sm group"
+            >
+              <span>View my work</span>
+              <ArrowRight className="w-4 h-4 text-accent group-hover:translate-x-1 transition-transform" />
+            </Link>
+          </MagneticButton>
 
-        <p className="font-sans text-lg sm:text-xl md:text-2xl text-textSecondary font-normal leading-relaxed pt-2">
-          Specializing in <span className="text-textPrimary font-semibold">{author.specialty}</span>.
-        </p>
-
-        {/* Verbatim Bio POV */}
-        <div className="p-5 bg-surface border-l-2 border-accent border-y border-r border-borderColor rounded-r-xl font-sans text-base sm:text-lg text-textPrimary leading-relaxed my-6 font-medium">
-          &ldquo;{author.bioPOV}&rdquo;
+          <MagneticButton strength={0.2}>
+            <a
+              href="#about"
+              className="inline-flex items-center gap-2 bg-surface border border-borderColor text-textPrimary font-sans font-medium text-sm px-8 py-4 rounded-xl hover:border-borderColorHover transition-colors"
+            >
+              <span>About me</span>
+              <ArrowDown className="w-4 h-4 text-textMuted" />
+            </a>
+          </MagneticButton>
         </div>
-      </div>
-
-      {/* Action Buttons */}
-      <div className="flex flex-wrap items-center gap-4 pt-2">
-        <Link
-          href="/work"
-          className="inline-flex items-center gap-3 bg-accent text-white font-sans font-semibold text-sm px-6 py-3.5 rounded-xl hover:opacity-90 transition-opacity shadow-sm group"
-        >
-          <span>View my work</span>
-          <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-        </Link>
-        <a
-          href="#about"
-          className="inline-flex items-center gap-2 bg-surface border border-borderColor text-textPrimary font-sans font-medium text-sm px-6 py-3.5 rounded-xl hover:border-borderColorHover transition-colors"
-        >
-          <span>About me</span>
-          <ArrowDown className="w-4 h-4 text-textMuted" />
-        </a>
-      </div>
+      </ScrollReveal>
     </section>
   );
 }
