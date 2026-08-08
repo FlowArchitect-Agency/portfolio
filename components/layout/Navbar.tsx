@@ -1,62 +1,92 @@
 'use client';
 
+import { useState } from 'react';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
-import ThemeToggle from '../ui/ThemeToggle';
 import MagneticButton from '../ui/MagneticButton';
+import ThemeToggle from '../ui/ThemeToggle';
+import { DESIGN_TOKENS } from '@/lib/design-tokens';
+import { Download, Menu, X } from 'lucide-react';
 
 export default function Navbar() {
-  const pathname = usePathname();
-
-  const navItems = [
-    { label: 'Work', href: '/work' },
-    { label: 'Lab', href: '/#lab' },
-    { label: 'About', href: '/#about' },
-    { label: 'Say Hi 👋', href: '/#contact' },
-  ];
+  const { author, navLinks } = DESIGN_TOKENS;
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-background/85 backdrop-blur-md border-b border-borderColor py-5 transition-all duration-300">
-      <div className="max-w-7xl mx-auto px-8 md:px-16 flex items-center justify-between">
-        {/* Minimal Text Logo: ✦ Mehdi. */}
-        <MagneticButton strength={0.15}>
-          <Link href="/" className="font-display font-bold text-xl text-textPrimary tracking-tight flex items-center gap-1.5 select-none">
-            <span className="text-accent font-bold text-lg">✦</span>
-            <span>Mehdi.</span>
-          </Link>
-        </MagneticButton>
+    <header className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-borderColor transition-colors duration-200">
+      <nav className="max-w-7xl mx-auto px-8 md:px-16 h-20 flex items-center justify-between font-sans select-none">
+        {/* Brand Text Wordmark (No Sparkle Icon) */}
+        <Link href="/" className="font-display font-bold text-xl tracking-tight text-textPrimary hover:opacity-80 transition-opacity">
+          <span>{author.name}.</span>
+        </Link>
 
-        {/* Navigation Links with Magnetic Hover */}
-        <nav className="flex items-center gap-6 md:gap-10 font-sans text-sm font-medium">
-          {navItems.map((item) => {
-            const isActive =
-              item.href === '/work'
-                ? pathname.startsWith('/work')
-                : pathname === '/' && item.href.startsWith('/#');
+        {/* Desktop Nav Links */}
+        <div className="hidden md:flex items-center gap-8 text-sm font-medium text-textSecondary">
+          {navLinks.map((link) => (
+            <MagneticButton key={link.label} strength={0.15}>
+              <Link
+                href={link.href}
+                className="hover:text-textPrimary transition-colors relative py-1"
+              >
+                {link.label}
+              </Link>
+            </MagneticButton>
+          ))}
 
-            return (
-              <MagneticButton key={item.label} strength={0.2}>
-                <a
-                  href={item.href}
-                  className={`transition-colors relative py-1 block ${
-                    isActive
-                      ? 'text-accent font-semibold'
-                      : 'text-textSecondary hover:text-textPrimary'
-                  }`}
-                >
-                  {item.label}
-                  {isActive && (
-                    <span className="absolute bottom-0 left-0 right-0 h-[2px] bg-accent rounded-full" />
-                  )}
-                </a>
-              </MagneticButton>
-            );
-          })}
+          {/* Download Resume Button */}
+          <MagneticButton strength={0.2}>
+            <a
+              href="/Mehdi_Mechkak_AI_Engineer_CV.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 bg-textPrimary text-background font-semibold text-xs uppercase tracking-wider px-4 py-2.5 rounded-lg hover:opacity-90 transition-opacity shadow-sm"
+            >
+              <Download className="w-3.5 h-3.5 text-accent" />
+              <span>RESUME</span>
+            </a>
+          </MagneticButton>
 
-          {/* Theme Toggle */}
+          {/* Theme Switcher */}
           <ThemeToggle />
-        </nav>
-      </div>
+        </div>
+
+        {/* Mobile Hamburger Toggle */}
+        <div className="flex md:hidden items-center gap-3">
+          <ThemeToggle />
+          <button
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            className="p-2 text-textPrimary hover:bg-surface border border-borderColor rounded-lg"
+            aria-label="Toggle navigation menu"
+          >
+            {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+          </button>
+        </div>
+      </nav>
+
+      {/* Mobile Drawer Menu */}
+      {mobileMenuOpen && (
+        <div className="md:hidden bg-background border-b border-borderColor px-8 py-6 space-y-4">
+          {navLinks.map((link) => (
+            <Link
+              key={link.label}
+              href={link.href}
+              onClick={() => setMobileMenuOpen(false)}
+              className="block font-display font-medium text-lg text-textPrimary hover:text-accent"
+            >
+              {link.label}
+            </Link>
+          ))}
+          <a
+            href="/Mehdi_Mechkak_AI_Engineer_CV.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={() => setMobileMenuOpen(false)}
+            className="inline-flex items-center gap-2 bg-textPrimary text-background font-semibold text-xs uppercase tracking-wider px-5 py-3 rounded-lg w-full justify-center mt-2"
+          >
+            <Download className="w-4 h-4 text-accent" />
+            <span>DOWNLOAD RESUME (PDF)</span>
+          </a>
+        </div>
+      )}
     </header>
   );
 }

@@ -13,7 +13,6 @@ export default function Footer() {
         <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 pb-10 border-b border-borderColor">
           <div>
             <div className="font-display font-bold text-xl text-textPrimary flex items-center gap-1.5">
-              <span className="text-accent">✦</span>
               <span>{author.name}</span>
             </div>
             <div className="text-textSecondary mt-1">{author.title} · {author.location}</div>

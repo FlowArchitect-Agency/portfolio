@@ -22,7 +22,7 @@ export default function HeroHome() {
             </div>
 
             <h1 className="font-display font-extrabold text-5xl sm:text-7xl md:text-8xl tracking-tight text-textPrimary leading-[1.02]">
-              <span className="text-accent">✦</span> {author.name}.<br />
+              {author.name}.<br />
               <span className="text-textSecondary font-bold">{author.title}.</span>
             </h1>
 

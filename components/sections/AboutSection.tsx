@@ -14,7 +14,7 @@ export default function AboutSection() {
       <ScrollReveal>
         <div>
           <div className="font-mono text-xs text-accent uppercase tracking-widest mb-3 font-tnum">
-            CHAPTER · 04 // ABOUT & RESUME
+            CHAPTER · 05 // ABOUT & RESUME
           </div>
           <h2 className="font-display text-4xl sm:text-5xl font-bold tracking-tight text-textPrimary">
             AI Engineering Philosophy
@@ -27,7 +27,7 @@ export default function AboutSection() {
         <ScrollReveal className="lg:col-span-7 space-y-8">
           <div className="space-y-2">
             <h3 className="font-display font-extrabold text-3xl sm:text-4xl text-textPrimary">
-              <span className="text-accent">✦</span> {author.name}
+              {author.name}
             </h3>
             <div className="font-sans text-base text-textSecondary font-semibold">{author.title}</div>
             <div className="font-mono text-xs text-textMuted">{author.location}</div>
