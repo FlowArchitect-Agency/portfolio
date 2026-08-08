@@ -8,7 +8,7 @@
 
 export default function HeroAvatarVideo() {
   return (
-    <div className="absolute inset-y-0 right-0 z-0 w-full md:w-[60%] lg:w-[55%] h-full overflow-hidden select-none pointer-events-none flex items-center justify-end">
+    <div className="absolute inset-y-0 right-0 z-0 w-full md:w-[65%] lg:w-[60%] h-full overflow-hidden select-none pointer-events-none flex items-center justify-end">
       <video
         autoPlay
         muted
@@ -21,7 +21,7 @@ export default function HeroAvatarVideo() {
         <source src="/avatar-tennis-fallback.mp4" type="video/mp4" />
       </video>
 
-      {/* Legibility scrim: subtle light gradient toward text side */}
+      {/* Legibility scrim */}
       <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-[#FAFAF7] via-[#FAFAF7]/40 to-transparent md:from-[#FAFAF7] md:via-[#FAFAF7]/20 to-transparent" />
     </div>
   );

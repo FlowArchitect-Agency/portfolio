@@ -27,7 +27,7 @@ export default function HeroHome() {
 
             {/* 2 Wide Horizontal Lines (Matching Michael Tsirakis Layout) */}
             <h1 className="font-display font-extrabold text-4xl sm:text-6xl md:text-7xl tracking-tight text-[#0A0A0B] leading-[1.04]">
-              <span className="text-accent font-bold">✦</span> {author.name}.<br />
+              {author.name}.<br />
               <span className="text-[#0A0A0B]/75 font-bold">{author.title}.</span>
             </h1>
 

@@ -12,7 +12,7 @@ export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-[#FAFAF7]/80 backdrop-blur-md border-b border-borderColor transition-colors duration-200">
+    <header className="fixed top-0 left-0 right-0 z-50 bg-[#FAFAF7]/85 backdrop-blur-md border-b border-borderColor transition-colors duration-200">
       <nav className="max-w-7xl mx-auto px-8 md:px-16 h-20 flex items-center justify-between font-sans select-none">
         {/* Brand Text Wordmark with ✦ Sparkle Icon */}
         <Link href="/" className="font-display font-bold text-2xl tracking-tight text-[#0A0A0B] hover:opacity-80 transition-opacity flex items-center gap-1.5">
