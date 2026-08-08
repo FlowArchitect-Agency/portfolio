@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { PROJECTS } from '@/lib/projects-data';
 import StickyChapterNav from '@/components/ui/StickyChapterNav';
 import MetricCounter from '@/components/ui/MetricCounter';
-import iPhoneMockup from '@/components/ui/iPhoneMockup';
+import IphoneMockup from '@/components/ui/iPhoneMockup';
 import ScrollReveal from '@/components/ui/ScrollReveal';
 import MagneticButton from '@/components/ui/MagneticButton';
 import { ArrowLeft, ExternalLink, Github, CheckCircle2, Layers } from 'lucide-react';
@@ -106,7 +106,7 @@ export default function CaseStudyPage({ params }: { params: { slug: string } }) 
             <h2 className="font-display font-bold text-3xl text-textPrimary">
               Test the Grounded Support Agent Live
             </h2>
-            <iPhoneMockup demoUrl={project.liveDemoUrl} title={project.title} />
+            <IphoneMockup demoUrl={project.liveDemoUrl} title={project.title} />
           </section>
         </ScrollReveal>
       )}

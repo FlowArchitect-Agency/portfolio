@@ -3,12 +3,12 @@
 import { useState } from 'react';
 import { ExternalLink, RefreshCw, Smartphone } from 'lucide-react';
 
-interface iPhoneMockupProps {
+interface IphoneMockupProps {
   demoUrl: string;
   title?: string;
 }
 
-export default function iPhoneMockup({ demoUrl, title = 'Polylingual Live Agent' }: iPhoneMockupProps) {
+export default function IphoneMockup({ demoUrl, title = 'Polylingual Live Agent' }: IphoneMockupProps) {
   const [key, setKey] = useState(0);
 
   const handleRefresh = () => {
@@ -16,7 +16,7 @@ export default function iPhoneMockup({ demoUrl, title = 'Polylingual Live Agent'
   };
 
   return (
-    <div className="w-full my-12 flex flex-col items-center">
+    <div className="w-full my-12 flex flex-col items-center select-none">
       {/* Control Bar */}
       <div className="w-full max-w-[380px] sm:max-w-[420px] bg-surfaceElevated border border-borderColor border-b-0 rounded-t-2xl px-5 py-3 flex items-center justify-between font-mono text-xs text-textMuted select-none">
         <div className="flex items-center gap-2">
