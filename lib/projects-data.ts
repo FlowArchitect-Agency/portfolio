@@ -46,6 +46,113 @@ export interface Project {
 
 export const PROJECTS: Project[] = [
   {
+    slug: 'hotel-concierge-ai',
+    title: 'Hotel Concierge AI (ConciergeFlow)',
+    tagline: '24/7 AI concierge for Paris boutique hotels with grounded n8n workflows and Airtable integration.',
+    category: 'AI agent · 2026 · Hospitality',
+    year: '2026',
+    role: 'AI Systems Engineer',
+    discipline: 'Hospitality Automation & n8n Workflows',
+    scope: 'Webhook & Conversational AI Engineering',
+    stack: ['JavaScript', 'Cloudflare Workers', 'n8n', 'Airtable', 'HTML5 / CSS3', 'pytest / Python Harness'],
+    githubUrl: 'https://github.com/FlowArchitect-Agency/hotel-concierge-ai',
+    liveDemoUrl: 'https://flowarchitect-agency.github.io/hotel-concierge-ai/#demo',
+    story:
+      'Boutique hotels in Paris miss late-night booking inquiries and spa upsell opportunities from international guests due to front-desk staffing limits. ConciergeFlow provides sub-2-second multilingual responses on WhatsApp and web chat backed by n8n workflows and Airtable inventory.',
+    contributions: [
+      'Designed luxury web chat widget and responsive landing interface for Paris boutique hotel clients.',
+      'Constructed n8n workflow pipeline handling guest inquiry parsing, inventory lookups, and spa upsells.',
+      'Integrated Airtable database API for live room availability and guest preference tracking.',
+      'Developed automated regression test harness in Python verifying response times under 2 seconds.',
+      'Implemented Cloudflare Worker edge proxy routing webhooks reliably.',
+    ],
+    metrics: [
+      { value: '<2.0s', label: 'Response Time', subtext: 'Sub-2-second multilingual answers' },
+      { value: '24/7', label: 'Availability', subtext: 'Capturing late-night international leads' },
+      { value: '100%', label: 'Grounded Answers', subtext: 'Verified against Airtable inventory' },
+      { value: 'n8n', label: 'Workflow Engine', subtext: 'Automated regression test suite' },
+    ],
+    screenshots: [
+      { url: '/project-screenshots/hotel-1.png', caption: 'ConciergeFlow Luxury Hero & Mobile Chat Preview' },
+      { url: '/project-screenshots/hotel-2.png', caption: 'Paris Boutique Hotel Value Proposition & Feature Cards' },
+      { url: '/project-screenshots/hotel-3.png', caption: 'Interactive Multilingual AI Concierge Chat Experience' },
+    ],
+    chapters: [
+      {
+        id: 'solution-highlights',
+        number: '01',
+        title: 'Solution highlights',
+        content:
+          'Delivers instant, elegant multilingual guest support for Paris luxury boutique hotels without front-desk overhead.',
+      },
+      {
+        id: 'the-problem',
+        number: '02',
+        title: 'The problem',
+        content:
+          'International guests booking from different timezones often abandon inquiries if front-desk staff cannot reply immediately.',
+      },
+      {
+        id: 'the-insight',
+        number: '03',
+        title: 'The insight',
+        content:
+          'Combining a high-end luxury UI aesthetic with deterministic n8n Airtable lookups creates a seamless VIP experience.',
+      },
+      {
+        id: 'explorations-iterations',
+        number: '04',
+        title: 'Explorations & iterations',
+        content:
+          'Iterated through direct webhook integrations to n8n visual flow nodes.',
+        artifacts: [
+          { imageUrl: '/project-screenshots/hotel-1.png', caption: 'Artifact 01: Luxury Hero' },
+          { imageUrl: '/project-screenshots/hotel-3.png', caption: 'Artifact 02: Interactive Chat Widget' },
+        ],
+      },
+      {
+        id: 'up-close',
+        number: '05',
+        title: 'Up close: System design',
+        content:
+          'Guest Chat Widget → Cloudflare Worker → n8n Webhook Node → Airtable API → LLM Response Synthesis → Guest Client.',
+      },
+      {
+        id: 'under-the-hood',
+        number: '06',
+        title: 'Under the hood',
+        content:
+          'Python test harness verifies n8n execution output against canonical benchmark responses.',
+        codeSnippet: {
+          filename: 'concierge_harness/tests.py',
+          language: 'python',
+          code: `def test_concierge_response_time():\n    response = requests.post(WEBHOOK_URL, json={"message": "Can I book a spa treatment at 8pm?"})\n    assert response.status_code == 200\n    assert response.elapsed.total_seconds() < 2.0`,
+        },
+      },
+      {
+        id: 'failure-modes',
+        number: '07',
+        title: 'Failure modes & guardrails',
+        content:
+          'Unrecognized booking queries automatically alert the front-desk duty manager via Airtable notification.',
+      },
+      {
+        id: 'measurable-impact',
+        number: '08',
+        title: 'Measurable impact',
+        content:
+          'Captured late-night reservation requests and increased spa upsell conversion rates for hotel partners.',
+      },
+      {
+        id: 'reflection',
+        number: '09',
+        title: 'Reflection / what I learned',
+        content:
+          'High-touch industries like luxury hospitality require ultra-fast response latencies and flawless visual presentation.',
+      },
+    ],
+  },
+  {
     slug: 'polylingual-ai-support-agent',
     title: 'Polylingual AI Support Agent',
     tagline: 'Evidence-first French/English support automation platform that escalates instead of guessing.',
@@ -370,112 +477,6 @@ export const PROJECTS: Project[] = [
         title: 'Reflection / what I learned',
         content:
           'Designing pluggable mock providers for LLM steps allows full CI/CD test automation without incurring API token costs.',
-      },
-    ],
-  },
-  {
-    slug: 'hotel-concierge-ai',
-    title: 'Hotel Concierge AI (ConciergeFlow)',
-    tagline: '24/7 AI concierge for Paris boutique hotels with grounded n8n workflows and Airtable integration.',
-    category: 'AI agent · 2026 · Hospitality',
-    year: '2026',
-    role: 'AI Systems Engineer',
-    discipline: 'Hospitality Automation & n8n Workflows',
-    scope: 'Webhook & Conversational AI Engineering',
-    stack: ['JavaScript', 'Cloudflare Workers', 'n8n', 'Airtable', 'HTML5 / CSS3', 'pytest / Python Harness'],
-    githubUrl: 'https://github.com/FlowArchitect-Agency/hotel-concierge-ai',
-    story:
-      'Boutique hotels in Paris miss late-night booking inquiries and spa upsell opportunities from international guests due to front-desk staffing limits. ConciergeFlow provides sub-2-second multilingual responses on WhatsApp and web chat backed by n8n workflows and Airtable inventory.',
-    contributions: [
-      'Designed luxury web chat widget and responsive landing interface for Paris boutique hotel clients.',
-      'Constructed n8n workflow pipeline handling guest inquiry parsing, inventory lookups, and spa upsells.',
-      'Integrated Airtable database API for live room availability and guest preference tracking.',
-      'Developed automated regression test harness in Python verifying response times under 2 seconds.',
-      'Implemented Cloudflare Worker edge proxy routing webhooks reliably.',
-    ],
-    metrics: [
-      { value: '<2.0s', label: 'Response Time', subtext: 'Sub-2-second multilingual answers' },
-      { value: '24/7', label: 'Availability', subtext: 'Capturing late-night international leads' },
-      { value: '100%', label: 'Grounded Answers', subtext: 'Verified against Airtable inventory' },
-      { value: 'n8n', label: 'Workflow Engine', subtext: 'Automated regression test suite' },
-    ],
-    screenshots: [
-      { url: '/project-screenshots/hotel-1.png', caption: 'ConciergeFlow Luxury Hero & Mobile Chat Preview' },
-      { url: '/project-screenshots/hotel-2.png', caption: 'Paris Boutique Hotel Value Proposition & Feature Cards' },
-      { url: '/project-screenshots/hotel-3.png', caption: 'Interactive Multilingual AI Concierge Chat Experience' },
-    ],
-    chapters: [
-      {
-        id: 'solution-highlights',
-        number: '01',
-        title: 'Solution highlights',
-        content:
-          'Delivers instant, elegant multilingual guest support for Paris luxury boutique hotels without front-desk overhead.',
-      },
-      {
-        id: 'the-problem',
-        number: '02',
-        title: 'The problem',
-        content:
-          'International guests booking from different timezones often abandon inquiries if front-desk staff cannot reply immediately.',
-      },
-      {
-        id: 'the-insight',
-        number: '03',
-        title: 'The insight',
-        content:
-          'Combining a high-end luxury UI aesthetic with deterministic n8n Airtable lookups creates a seamless VIP experience.',
-      },
-      {
-        id: 'explorations-iterations',
-        number: '04',
-        title: 'Explorations & iterations',
-        content:
-          'Iterated through direct webhook integrations to n8n visual flow nodes.',
-        artifacts: [
-          { imageUrl: '/project-screenshots/hotel-1.png', caption: 'Artifact 01: Luxury Hero' },
-          { imageUrl: '/project-screenshots/hotel-3.png', caption: 'Artifact 02: Interactive Chat Widget' },
-        ],
-      },
-      {
-        id: 'up-close',
-        number: '05',
-        title: 'Up close: System design',
-        content:
-          'Guest Chat Widget → Cloudflare Worker → n8n Webhook Node → Airtable API → LLM Response Synthesis → Guest Client.',
-      },
-      {
-        id: 'under-the-hood',
-        number: '06',
-        title: 'Under the hood',
-        content:
-          'Python test harness verifies n8n execution output against canonical benchmark responses.',
-        codeSnippet: {
-          filename: 'concierge_harness/tests.py',
-          language: 'python',
-          code: `def test_concierge_response_time():\n    response = requests.post(WEBHOOK_URL, json={"message": "Can I book a spa treatment at 8pm?"})\n    assert response.status_code == 200\n    assert response.elapsed.total_seconds() < 2.0`,
-        },
-      },
-      {
-        id: 'failure-modes',
-        number: '07',
-        title: 'Failure modes & guardrails',
-        content:
-          'Unrecognized booking queries automatically alert the front-desk duty manager via Airtable notification.',
-      },
-      {
-        id: 'measurable-impact',
-        number: '08',
-        title: 'Measurable impact',
-        content:
-          'Captured late-night reservation requests and increased spa upsell conversion rates for hotel partners.',
-      },
-      {
-        id: 'reflection',
-        number: '09',
-        title: 'Reflection / what I learned',
-        content:
-          'High-touch industries like luxury hospitality require ultra-fast response latencies and flawless visual presentation.',
       },
     ],
   },

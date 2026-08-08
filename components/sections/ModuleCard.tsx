@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import Image from 'next/image';
 import StatusBadge from '../ui/StatusBadge';
-import { ExternalLink, Github, Terminal, Layers } from 'lucide-react';
+import { ExternalLink, Github, Terminal, Layers, Globe } from 'lucide-react';
 
 export interface ModuleData {
   indexNumber: string;
@@ -13,6 +13,7 @@ export interface ModuleData {
   manifesto: string;
   stack: string[];
   githubUrl: string;
+  liveDemoUrl?: string;
   imagePath: string;
   description?: string;
 }
@@ -103,18 +104,32 @@ export default function ModuleCard({ module }: { module: ModuleData }) {
       </div>
 
       {/* Bottom Action Footer */}
-      <div className="pt-4 border-t border-borderMuted/80 flex items-center justify-between font-mono text-xs">
-        <span className="text-mutedText">SOURCE CODE REPOSITORY</span>
-        <a
-          href={module.githubUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 bg-darkText text-canvas px-4 py-2.5 rounded-sm uppercase tracking-wider font-semibold hover:bg-accent transition-colors group/link"
-        >
-          <Github className="w-4 h-4" />
-          <span>VIEW CODE</span>
-          <ExternalLink className="w-3.5 h-3.5 text-canvas group-hover/link:translate-x-0.5 transition-transform" />
-        </a>
+      <div className="pt-4 border-t border-borderMuted/80 flex flex-wrap items-center justify-between gap-3 font-mono text-xs">
+        <span className="text-mutedText">PROJECT LINKS</span>
+        <div className="flex items-center gap-3">
+          {module.liveDemoUrl && (
+            <a
+              href={module.liveDemoUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 bg-accent text-white px-4 py-2.5 rounded-sm uppercase tracking-wider font-semibold hover:opacity-90 transition-opacity"
+            >
+              <Globe className="w-4 h-4" />
+              <span>LIVE DEMO</span>
+              <ExternalLink className="w-3.5 h-3.5" />
+            </a>
+          )}
+          <a
+            href={module.githubUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 bg-darkText text-canvas px-4 py-2.5 rounded-sm uppercase tracking-wider font-semibold hover:bg-accent transition-colors group/link"
+          >
+            <Github className="w-4 h-4" />
+            <span>VIEW CODE</span>
+            <ExternalLink className="w-3.5 h-3.5 text-canvas group-hover/link:translate-x-0.5 transition-transform" />
+          </a>
+        </div>
       </div>
     </article>
   );

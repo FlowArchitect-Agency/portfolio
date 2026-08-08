@@ -3,24 +3,35 @@
 import { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import ModuleCard, { ModuleData } from './ModuleCard';
-import StatusBadge from '../ui/StatusBadge';
 import { Layers } from 'lucide-react';
 
 const MODULES_DATA: ModuleData[] = [
   {
     indexNumber: '01',
+    title: 'Hotel Concierge AI',
+    idCode: 'CONCIERGE-MULTI-A01',
+    status: 'ACTIVE',
+    manifesto: 'Grounded answers, tested automatically, every release.',
+    stack: ['JavaScript', 'n8n', 'Airtable', 'Cloudflare Workers'],
+    githubUrl: 'https://github.com/FlowArchitect-Agency/hotel-concierge-ai',
+    liveDemoUrl: 'https://flowarchitect-agency.github.io/hotel-concierge-ai/#demo',
+    imagePath: '/projects/concierge.png',
+  },
+  {
+    indexNumber: '02',
     title: 'Polylingual AI Support Agent',
-    idCode: 'RAG-SUPPORT-A01',
+    idCode: 'RAG-SUPPORT-B02',
     status: 'ACTIVE',
     manifesto: 'Evidence-first. Escalates instead of guessing.',
     stack: ['Python', 'RAG', 'pgvector', 'GLM 5.2'],
     githubUrl: 'https://github.com/FlowArchitect-Agency/polylingual-ai-support-agent',
+    liveDemoUrl: 'https://d15fb7gio4xmdn.cloudfront.net',
     imagePath: '/projects/rag-support.png',
   },
   {
-    indexNumber: '02',
+    indexNumber: '03',
     title: 'AI Internal Tool Builder',
-    idCode: 'WORKFLOW-BUILD-B02',
+    idCode: 'WORKFLOW-BUILD-C03',
     status: 'ACTIVE',
     manifesto: 'Nothing executes without a human signing off.',
     stack: ['TypeScript', 'Prisma', 'PostgreSQL'],
@@ -28,24 +39,14 @@ const MODULES_DATA: ModuleData[] = [
     imagePath: '/projects/workflow-builder.png',
   },
   {
-    indexNumber: '03',
+    indexNumber: '04',
     title: 'Automated BI Pipeline',
-    idCode: 'BI-PIPELINE-C03',
+    idCode: 'BI-PIPELINE-D04',
     status: 'ACTIVE',
     manifesto: 'Enrichment is automatic. Trust is not.',
     stack: ['Python', 'Airflow', 'Postgres', 'Streamlit'],
     githubUrl: 'https://github.com/FlowArchitect-Agency/automated-bi-pipeline',
     imagePath: '/projects/bi-pipeline.png',
-  },
-  {
-    indexNumber: '04',
-    title: 'Hotel Concierge AI',
-    idCode: 'CONCIERGE-MULTI-D04',
-    status: 'ACTIVE',
-    manifesto: 'Grounded answers, tested automatically, every release.',
-    stack: ['JavaScript', 'n8n', 'Airtable'],
-    githubUrl: 'https://github.com/FlowArchitect-Agency/hotel-concierge-ai',
-    imagePath: '/projects/concierge.png',
   },
 ];
 
@@ -69,7 +70,7 @@ export default function ModulesSection() {
               SYSTEM MODULES // 04 PRODUCTION REPOS
             </div>
             <h2 className="font-display text-4xl sm:text-5xl font-bold tracking-tight text-darkText uppercase">
-              WORK & DEPLOYMENTS
+              WORK &amp; DEPLOYMENTS
             </h2>
           </div>
           <p className="font-mono text-xs text-mutedText max-w-md">
