@@ -24,6 +24,13 @@ export const DESIGN_TOKENS = {
     body: "'Inter', 'Geist', sans-serif",
     mono: "'JetBrains Mono', 'Geist Mono', monospace",
   },
+  navLinks: [
+    { label: 'Work', href: '/#work' },
+    { label: 'Lab', href: '/#lab' },
+    { label: 'Journey', href: '/#journey' },
+    { label: 'About', href: '/#about' },
+    { label: 'Contact', href: '/#contact' },
+  ],
   author: {
     name: 'Mehdi Mechkak',
     title: 'Applied AI Engineer',
