@@ -1,0 +1,116 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-space-grotesk: 'Space Grotesk', sans-serif;
+  --font-jetbrains-mono: 'JetBrains Mono', monospace;
+  --font-inter: 'Inter', sans-serif;
+}
+
+html {
+  background-color: #F7F6F3;
+  color: #111318;
+  font-family: var(--font-inter), sans-serif;
+  scroll-behavior: auto; /* Lenis handles smooth scroll */
+}
+
+/* Lenis smooth scrolling */
+html.lenis, html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-scrolling iframe {
+  pointer-events: none;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #F7F6F3;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #DCDAD4;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #FF3B00;
+}
+
+/* Technical grid background pattern */
+.bg-tech-grid {
+  background-size: 32px 32px;
+  background-image: 
+    linear-gradient(to right, rgba(0, 0, 0, 0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.04) 1px, transparent 1px);
+}
+
+.bg-tech-dots {
+  background-size: 24px 24px;
+  background-image: radial-gradient(circle, rgba(0, 0, 0, 0.07) 1px, transparent 1px);
+}
+
+/* Layered typography signature styles */
+.layered-text-base {
+  position: relative;
+  display: inline-block;
+}
+
+.layered-text-offset {
+  position: absolute;
+  top: -0.06em;
+  left: 0.06em;
+  color: #FF3B00;
+  opacity: 0.35;
+  pointer-events: none;
+  z-index: -1;
+  user-select: none;
+}
+
+.layered-text-stroke {
+  -webkit-text-stroke: 1.5px #111318;
+  color: transparent;
+}
+
+/* Selection style */
+::selection {
+  background-color: #FF3B00;
+  color: #FFFFFF;
+}
+
+/* Accessibility focus state */
+:focus-visible {
+  outline: 2px solid #FF3B00;
+  outline-offset: 3px;
+}
+
+/* Prefers reduced motion overrides */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .lenis.lenis-smooth {
+    scroll-behavior: auto !important;
+  }
+}
