@@ -6,6 +6,7 @@ build/
 
 # Temp scratch frames & scripts
 scratch_ai_frames/
+scratch_hsv_frames/
 *.log
 
 # Environment variables
