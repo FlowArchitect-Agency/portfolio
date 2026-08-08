@@ -1,6 +1,7 @@
 import type { Config } from 'tailwindcss';
 
 const config: Config = {
+  darkMode: ['class', '[data-theme="dark"]'],
   content: [
     './pages/**/*.{js,ts,jsx,tsx,mdx}',
     './components/**/*.{js,ts,jsx,tsx,mdx}',
@@ -9,34 +10,24 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        canvas: '#F7F6F3',
-        surface: '#EFECE6',
-        card: '#FAFAF8',
-        darkText: '#111318',
-        mutedText: '#666873',
-        borderMuted: '#DCDAD4',
+        background: 'var(--bg-background)',
+        surface: 'var(--bg-surface)',
+        surfaceElevated: 'var(--bg-surface-elevated)',
+        borderColor: 'var(--border-color)',
+        borderColorHover: 'var(--border-color-hover)',
+        textPrimary: 'var(--text-primary)',
+        textSecondary: 'var(--text-secondary)',
+        textMuted: 'var(--text-muted)',
         accent: {
-          DEFAULT: '#FF3B00',
-          hover: '#E03400',
-          soft: 'rgba(255, 59, 0, 0.08)',
-          glow: 'rgba(255, 59, 0, 0.25)',
+          DEFAULT: 'var(--color-accent)',
+          soft: 'var(--color-accent-soft)',
+          glow: 'var(--color-accent-glow)',
         },
       },
       fontFamily: {
-        display: ['var(--font-space-grotesk)', 'sans-serif'],
-        mono: ['var(--font-jetbrains-mono)', 'monospace'],
-        sans: ['var(--font-inter)', 'sans-serif'],
-      },
-      animation: {
-        'spin-slow': 'spin 20s linear infinite',
-        'pulse-subtle': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-        'ticker': 'ticker 30s linear infinite',
-      },
-      keyframes: {
-        ticker: {
-          '0%': { transform: 'translateX(0%)' },
-          '100%': { transform: 'translateX(-50%)' },
-        },
+        display: ['Inter Tight', 'General Sans', 'sans-serif'],
+        sans: ['Inter', 'Geist', 'sans-serif'],
+        mono: ['JetBrains Mono', 'Geist Mono', 'monospace'],
       },
     },
   },
