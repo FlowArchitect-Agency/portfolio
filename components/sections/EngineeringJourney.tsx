@@ -1,30 +1,32 @@
 "use client";
 
 /**
- * EngineeringJourney.tsx
+ * EngineeringJourney.tsx — v2
  *
  * Full-bleed, scroll-driven sequence for the engineering background.
- * Each phase gets its OWN section (min-h-[90vh]), its own animated background motif,
- * and detail copy fades/slides in on enter.
+ * Textured #0B0B0E background, abstract high-contrast line-diagram motifs,
+ * signature left throughline drawing down on scroll, and numbered indices 01/02/03.
  */
 
 import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 
 type Phase = {
+  index: string;
   eyebrow: string;
   role: string;
   org: string;
   years: string;
   summary: string;
   details: string[];
-  accent: string; // hex, used for glow/particles specific to this phase
-  motif: "industrial" | "pharma" | "hydrogen";
+  accent: string;
+  motif: "grid" | "pharma" | "hydrogen";
 };
 
 const PHASES: Phase[] = [
   {
-    eyebrow: "PHASE 01 // OIL & GAS FIELD ENGINEERING",
+    index: "01",
+    eyebrow: "OIL & GAS FIELD ENGINEERING",
     role: "Power Systems, High-Voltage & SCADA Instrumentation",
     org: "SONATRACH · Equinor · ENI · CEPSA — Algeria",
     years: "2023 – 2025",
@@ -33,14 +35,15 @@ const PHASES: Phase[] = [
     details: [
       "Analyzed Gas Turbine Generators (GTG) and their electrical subsystems",
       "Inspected 10kV motor high-voltage protection systems, ran Megger relay testing",
-      "Supervised DCS (Distributed Control Systems) and PLC logic across heavy energy infrastructure",
+      "Supervised DCS and PLC logic across heavy energy infrastructure",
       "Maintained UPS units, transformers, and rotating machinery on critical circuits",
     ],
-    accent: "#F4762A", // industrial flare orange
-    motif: "industrial",
+    accent: "#F0A345",
+    motif: "grid",
   },
   {
-    eyebrow: "PHASE 02 // PHARMACEUTICAL FACILITIES ENGINEERING",
+    index: "02",
+    eyebrow: "PHARMACEUTICAL FACILITIES ENGINEERING",
     role: "Process Supervision & Facilities Quality Control",
     org: "Al-Hikmah Pharmaceuticals — Algeria",
     years: "2023",
@@ -52,11 +55,12 @@ const PHASES: Phase[] = [
       "Maintained automated production lines (blistering, counting) under strict SOPs",
       "Ran physicochemical quality checks (pH, conductivity) against pharmacopeia standards",
     ],
-    accent: "#2FB6A3", // clinical teal
+    accent: "#3FC7B0",
     motif: "pharma",
   },
   {
-    eyebrow: "PHASE 03 // ACADEMIC FOUNDATION",
+    index: "03",
+    eyebrow: "ACADEMIC FOUNDATION",
     role: "MSc Electrical Engineering & Green Hydrogen",
     org: "ENP Algiers · University of Rostock",
     years: "2021 – 2026",
@@ -68,75 +72,105 @@ const PHASES: Phase[] = [
       "Studied matrix converters and thermal sensors for offshore wind-to-hydrogen systems",
       "Wind Energy & Green Hydrogen certification — University of Rostock (Prof. Uwe Ritschel)",
     ],
-    accent: "#6E56CF", // electric indigo
+    accent: "#8B7CF6",
     motif: "hydrogen",
   },
 ];
 
 export default function EngineeringJourney() {
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start start", "end end"],
+  });
+  const lineHeight = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
+
   return (
-    <section id="journey" aria-label="Engineering background and journey" className="relative bg-[#0A0A0B]">
-      <div className="px-6 pt-24 pb-4 md:px-16 max-w-7xl mx-auto">
-        <p className="font-mono text-xs tracking-[0.2em] text-white/40">
+    <section
+      ref={sectionRef}
+      id="journey"
+      aria-label="Engineering background and journey"
+      className="relative overflow-hidden bg-[#0B0B0E]"
+    >
+      {/* textured background — matches Experiments section, no flat black */}
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_15%_10%,rgba(240,163,69,0.08),transparent_40%),radial-gradient(circle_at_85%_60%,rgba(139,124,246,0.1),transparent_40%)]" />
+      <div
+        className="pointer-events-none absolute inset-0 opacity-[0.12]"
+        style={{
+          backgroundImage:
+            "radial-gradient(circle, rgba(255,255,255,0.5) 1px, transparent 1px)",
+          backgroundSize: "28px 28px",
+        }}
+      />
+
+      <div className="relative px-6 pt-28 pb-8 md:px-16 max-w-7xl mx-auto">
+        <p className="font-mono text-xs tracking-[0.25em] text-white/40 font-tnum">
           CHAPTER · 04 // ENGINEERING BACKGROUND
         </p>
-        <h2 className="mt-3 max-w-xl text-3xl font-bold text-white md:text-5xl">
+        <h2 className="mt-4 max-w-2xl text-4xl font-bold leading-[1.05] tracking-tight text-white md:text-6xl font-display">
           Before the AI systems, there was the physical infrastructure.
         </h2>
       </div>
 
-      {PHASES.map((phase, i) => (
-        <PhaseSection key={phase.role} phase={phase} index={i} />
+      {/* signature throughline — draws down as you scroll the whole section */}
+      <div className="pointer-events-none absolute left-8 top-0 hidden h-full w-px bg-white/10 md:left-16 md:block">
+        <motion.div
+          style={{ height: lineHeight }}
+          className="w-px bg-gradient-to-b from-[#F0A345] via-[#3FC7B0] to-[#8B7CF6]"
+        />
+      </div>
+
+      {PHASES.map((phase) => (
+        <PhaseSection key={phase.role} phase={phase} />
       ))}
     </section>
   );
 }
 
-function PhaseSection({ phase }: { phase: Phase; index: number }) {
+function PhaseSection({ phase }: { phase: Phase }) {
   const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start end", "end start"],
   });
 
-  // Motif drifts slower than scroll (parallax); copy rises in as it enters.
-  const motifY = useTransform(scrollYProgress, [0, 1], [60, -60]);
-  const copyOpacity = useTransform(scrollYProgress, [0.15, 0.4, 0.75, 1], [0, 1, 1, 0.3]);
-  const copyY = useTransform(scrollYProgress, [0.15, 0.4], [40, 0]);
+  const motifY = useTransform(scrollYProgress, [0, 1], [50, -50]);
+  const copyOpacity = useTransform(scrollYProgress, [0.15, 0.4, 0.75, 1], [0, 1, 1, 0.35]);
+  const copyY = useTransform(scrollYProgress, [0.15, 0.4], [30, 0]);
 
   return (
     <div
       ref={ref}
-      className="relative flex min-h-[90vh] items-center overflow-hidden border-t border-white/5 px-6 md:px-16"
+      className="relative flex min-h-[90vh] items-center overflow-hidden border-t border-white/5 pl-8 pr-6 md:pl-24 md:pr-16 max-w-7xl mx-auto"
     >
-      {/* Background motif layer — unique per phase */}
-      <motion.div
-        style={{ y: motifY }}
-        className="pointer-events-none absolute inset-0 opacity-[0.35]"
-      >
-        {phase.motif === "industrial" && <IndustrialMotif accent={phase.accent} />}
-        {phase.motif === "pharma" && <PharmaMotif accent={phase.accent} />}
-        {phase.motif === "hydrogen" && <HydrogenMotif accent={phase.accent} />}
+      <motion.div style={{ y: motifY }} className="pointer-events-none absolute inset-0">
+        {phase.motif === "grid" && <GridMotif accent={phase.accent} />}
+        {phase.motif === "pharma" && <VialMotif accent={phase.accent} />}
+        {phase.motif === "hydrogen" && <TurbineMotif accent={phase.accent} />}
       </motion.div>
 
-      {/* Vignette so copy stays readable over the motif */}
-      <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-[#0A0A0B] via-[#0A0A0B]/70 to-[#0A0A0B]/20" />
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-[#0B0B0E] via-[#0B0B0E]/75 to-[#0B0B0E]/10" />
 
-      <motion.div
-        style={{ opacity: copyOpacity, y: copyY }}
-        className="relative z-10 max-w-xl mx-auto md:mx-0"
-      >
-        <span
-          className="font-mono text-xs tracking-[0.2em]"
-          style={{ color: phase.accent }}
-        >
-          {phase.eyebrow}
-        </span>
-        <h3 className="mt-3 text-2xl font-bold text-white md:text-4xl">{phase.role}</h3>
-        <p className="mt-2 text-sm text-white/50">
+      <motion.div style={{ opacity: copyOpacity, y: copyY }} className="relative z-10 max-w-xl">
+        <div className="flex items-baseline gap-4">
+          <span
+            className="font-mono text-6xl font-bold leading-none opacity-30 font-tnum"
+            style={{ color: phase.accent }}
+          >
+            {phase.index}
+          </span>
+          <span className="font-mono text-xs tracking-[0.25em] text-white/50">
+            {phase.eyebrow}
+          </span>
+        </div>
+
+        <h3 className="mt-4 text-3xl font-bold leading-tight text-white md:text-5xl font-display">
+          {phase.role}
+        </h3>
+        <p className="mt-3 text-sm text-white/50">
           {phase.org} · {phase.years}
         </p>
-        <p className="mt-5 text-base leading-relaxed text-white/70">{phase.summary}</p>
+        <p className="mt-5 text-base leading-relaxed text-white/70 leading-relaxed font-sans">{phase.summary}</p>
 
         <ul className="mt-6 space-y-3">
           {phase.details.map((d, i) => (
@@ -146,7 +180,7 @@ function PhaseSection({ phase }: { phase: Phase; index: number }) {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true, margin: "-10%" }}
               transition={{ delay: i * 0.08, duration: 0.4 }}
-              className="flex items-start gap-3 text-sm text-white/60"
+              className="flex items-start gap-3 text-sm text-white/60 font-sans"
             >
               <span
                 className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full"
@@ -162,88 +196,132 @@ function PhaseSection({ phase }: { phase: Phase; index: number }) {
 }
 
 /* ---------------------------------------------------------------------- */
-/* Motifs — lightweight animated SVG, no external image assets required.  */
+/* Motifs — abstract, bigger, high-contrast. No literal clipart icons.    */
 /* ---------------------------------------------------------------------- */
 
-function IndustrialMotif({ accent }: { accent: string }) {
-  // Flare + pipeline silhouette with a flickering flame glow
+function GridMotif({ accent }: { accent: string }) {
   return (
-    <svg viewBox="0 0 1200 800" className="h-full w-full" preserveAspectRatio="xMidYMid slice">
-      <g stroke={accent} strokeWidth="1.5" fill="none" opacity="0.5">
-        <path d="M0 620 L300 620 L340 560 L420 560 L460 620 L1200 620" />
-        <path d="M200 620 L200 500 L260 500 L260 620" />
-        <path d="M700 620 L700 480 L760 480 L760 620" />
-      </g>
-      <motion.circle
-        cx="740"
-        cy="440"
-        r="22"
-        fill={accent}
-        animate={{ opacity: [0.3, 0.9, 0.4, 0.8, 0.3], scale: [1, 1.15, 0.95, 1.1, 1] }}
-        transition={{ duration: 2.4, repeat: Infinity, ease: "easeInOut" }}
-        style={{ filter: "blur(6px)" }}
-      />
+    <svg viewBox="0 0 1200 800" className="h-full w-full opacity-70" preserveAspectRatio="xMidYMid slice">
+      {Array.from({ length: 6 }).map((_, i) => (
+        <line
+          key={`v${i}`}
+          x1={700 + i * 70}
+          y1="150"
+          x2={700 + i * 70}
+          y2="650"
+          stroke={accent}
+          strokeWidth="1"
+          opacity="0.15"
+        />
+      ))}
       <motion.path
-        d="M740 470 C 730 440, 750 420, 740 390 C 760 415, 770 440, 745 470 Z"
+        d="M650 400 L720 400 L740 300 L770 500 L800 250 L830 400 L1150 400"
+        stroke={accent}
+        strokeWidth="2.5"
+        fill="none"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        initial={{ pathLength: 0, opacity: 0 }}
+        whileInView={{ pathLength: 1, opacity: 0.9 }}
+        viewport={{ once: true }}
+        transition={{ duration: 1.6, ease: "easeInOut" }}
+        style={{ filter: `drop-shadow(0 0 8px ${accent})` }}
+      />
+      <motion.circle
+        cx="770"
+        cy="500"
+        r="6"
         fill={accent}
-        animate={{ opacity: [0.6, 1, 0.7, 1, 0.6] }}
-        transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut" }}
+        animate={{ opacity: [0.4, 1, 0.4], scale: [1, 1.3, 1] }}
+        transition={{ duration: 1.4, repeat: Infinity }}
+        style={{ filter: `drop-shadow(0 0 10px ${accent})` }}
       />
     </svg>
   );
 }
 
-function PharmaMotif({ accent }: { accent: string }) {
-  // Rising purification bubbles + capsule silhouette
+function VialMotif({ accent }: { accent: string }) {
   return (
-    <svg viewBox="0 0 1200 800" className="h-full w-full" preserveAspectRatio="xMidYMid slice">
-      <rect x="560" y="300" width="80" height="200" rx="40" fill="none" stroke={accent} strokeWidth="1.5" opacity="0.4" />
-      <line x1="560" y1="400" x2="640" y2="400" stroke={accent} strokeWidth="1.5" opacity="0.4" />
-      {Array.from({ length: 10 }).map((_, i) => (
-        <motion.circle
+    <svg viewBox="0 0 1200 800" className="h-full w-full opacity-70" preserveAspectRatio="xMidYMid slice">
+      <rect
+        x="780"
+        y="220"
+        width="140"
+        height="340"
+        rx="16"
+        fill="none"
+        stroke={accent}
+        strokeWidth="2"
+        opacity="0.5"
+      />
+      <clipPath id="vialClip">
+        <rect x="784" y="224" width="132" height="332" rx="14" />
+      </clipPath>
+      <motion.rect
+        x="784"
+        width="132"
+        fill={accent}
+        opacity="0.25"
+        clipPath="url(#vialClip)"
+        initial={{ y: 556, height: 0 }}
+        whileInView={{ y: 340, height: 216 }}
+        viewport={{ once: true }}
+        transition={{ duration: 1.4, ease: "easeOut" }}
+      />
+      <motion.line
+        x1="784"
+        x2="916"
+        stroke={accent}
+        strokeWidth="2"
+        clipPath="url(#vialClip)"
+        initial={{ y1: 556, y2: 556 }}
+        animate={{ y1: [340, 348, 340], y2: [340, 332, 340] }}
+        transition={{ duration: 3, repeat: Infinity, ease: "easeInOut", delay: 1.4 }}
+      />
+      {[0, 1, 2].map((i) => (
+        <line
           key={i}
-          cx={550 + ((i * 73) % 500)}
-          r={3 + (i % 3)}
-          fill={accent}
-          initial={{ cy: 700, opacity: 0 }}
-          animate={{ cy: 60, opacity: [0, 0.7, 0] }}
-          transition={{
-            duration: 6 + (i % 4),
-            repeat: Infinity,
-            delay: i * 0.7,
-            ease: "linear",
-          }}
+          x1="770"
+          x2="780"
+          y1={280 + i * 90}
+          y2={280 + i * 90}
+          stroke={accent}
+          strokeWidth="1.5"
+          opacity="0.4"
         />
       ))}
     </svg>
   );
 }
 
-function HydrogenMotif({ accent }: { accent: string }) {
-  // Wind-turbine blade sweep + circuit/H2 molecule pulses (ties to green hydrogen)
+function TurbineMotif({ accent }: { accent: string }) {
   return (
-    <svg viewBox="0 0 1200 800" className="h-full w-full" preserveAspectRatio="xMidYMid slice">
-      <g transform="translate(300,260)">
-        <line x1="0" y1="0" x2="0" y2="260" stroke={accent} strokeWidth="1.5" opacity="0.4" />
+    <svg viewBox="0 0 1200 800" className="h-full w-full opacity-70" preserveAspectRatio="xMidYMid slice">
+      <g transform="translate(820,420)">
+        <line x1="0" y1="0" x2="0" y2="220" stroke={accent} strokeWidth="2" opacity="0.5" />
         <motion.g
           animate={{ rotate: 360 }}
-          transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
+          transition={{ duration: 7, repeat: Infinity, ease: "linear" }}
           style={{ originX: "0px", originY: "0px" }}
         >
-          <line x1="0" y1="0" x2="0" y2="-90" stroke={accent} strokeWidth="2" opacity="0.6" />
-          <line x1="0" y1="0" x2="78" y2="45" stroke={accent} strokeWidth="2" opacity="0.6" />
-          <line x1="0" y1="0" x2="-78" y2="45" stroke={accent} strokeWidth="2" opacity="0.6" />
+          <line x1="0" y1="0" x2="0" y2="-110" stroke={accent} strokeWidth="3" strokeLinecap="round" opacity="0.8" />
+          <line x1="0" y1="0" x2="95" y2="55" stroke={accent} strokeWidth="3" strokeLinecap="round" opacity="0.8" />
+          <line x1="0" y1="0" x2="-95" y2="55" stroke={accent} strokeWidth="3" strokeLinecap="round" opacity="0.8" />
         </motion.g>
+        <circle r="8" fill={accent} />
       </g>
-      {/* simple H2 molecule pulse */}
-      <motion.g
-        animate={{ opacity: [0.3, 0.8, 0.3] }}
-        transition={{ duration: 2.4, repeat: Infinity }}
-      >
-        <circle cx="820" cy="500" r="10" fill={accent} opacity="0.5" />
-        <circle cx="870" cy="500" r="10" fill={accent} opacity="0.5" />
-        <line x1="830" y1="500" x2="860" y2="500" stroke={accent} strokeWidth="2" opacity="0.5" />
-      </motion.g>
+
+      <g transform="translate(300,300)">
+        <ellipse cx="0" cy="0" rx="90" ry="34" stroke={accent} strokeWidth="1.5" fill="none" opacity="0.4" />
+        <motion.circle
+          r="6"
+          fill={accent}
+          animate={{ offsetDistance: ["0%", "100%"] }}
+          transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
+          style={{ offsetPath: "path('M -90 0 A 90 34 0 1 1 90 0 A 90 34 0 1 1 -90 0')" }}
+        />
+        <circle r="14" fill={accent} opacity="0.9" />
+      </g>
     </svg>
   );
 }
