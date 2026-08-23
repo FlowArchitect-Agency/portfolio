@@ -30,13 +30,26 @@
     --color-accent-soft: rgba(110, 86, 207, 0.08);
     --color-accent-glow: rgba(110, 86, 207, 0.16);
   }
+  
+  :root {
+    /* Apple Canonical Motion Easing Curves (emilkowalski/skills) */
+    --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+    --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+    --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
+    --ease-spring: cubic-bezier(0.16, 1, 0.3, 1);
+  }
+}
+
+* {
+  -webkit-tap-highlight-color: transparent;
 }
 
 html {
   background-color: var(--bg-background);
   color: var(--text-primary);
-  font-family: 'Inter', system-ui, sans-serif;
-  transition: background-color 0.25s ease, color 0.25s ease;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", 'Inter', system-ui, sans-serif;
+  letter-spacing: -0.01em;
+  transition: background-color 0.25s var(--ease-out), color 0.25s var(--ease-out);
   scroll-behavior: smooth;
 }
 
@@ -44,6 +57,12 @@ body {
   background-color: var(--bg-background);
   color: var(--text-primary);
   overflow-x: hidden;
+}
+
+/* Button & Interactive Press States (Apple Design Tenet: instant tactile feedback) */
+button:active, a:active {
+  transform: scale(0.975);
+  transition: transform 100ms var(--ease-out);
 }
 
 /* Tabular figures for numerals & metrics */

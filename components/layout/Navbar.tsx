@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import { AnimatePresence, motion } from 'framer-motion';
 import MagneticButton from '../ui/MagneticButton';
 import ThemeToggle from '../ui/ThemeToggle';
 import { DESIGN_TOKENS } from '@/lib/design-tokens';
@@ -53,41 +54,50 @@ export default function Navbar() {
         {/* Mobile Hamburger Toggle */}
         <div className="flex md:hidden items-center gap-3">
           <ThemeToggle />
-          <button
+          <motion.button
+            whileTap={{ scale: 0.94 }}
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="p-2 text-[#0A0A0B] hover:bg-surface border border-borderColor rounded-lg"
+            className="p-2 text-[#0A0A0B] hover:bg-surface border border-borderColor rounded-lg transition-colors"
             aria-label="Toggle navigation menu"
           >
             {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-          </button>
+          </motion.button>
         </div>
       </nav>
 
-      {/* Mobile Drawer Menu */}
-      {mobileMenuOpen && (
-        <div className="md:hidden bg-[#FAFAF7] border-b border-borderColor px-8 py-6 space-y-4">
-          {navLinks.map((link) => (
-            <Link
-              key={link.label}
-              href={link.href}
-              onClick={() => setMobileMenuOpen(false)}
-              className="block font-display font-medium text-lg text-[#0A0A0B] hover:text-accent"
-            >
-              {link.label}
-            </Link>
-          ))}
-          <a
-            href="/Mehdi_Mechkak_AI_Engineer_CV.pdf"
-            target="_blank"
-            rel="noopener noreferrer"
-            onClick={() => setMobileMenuOpen(false)}
-            className="inline-flex items-center gap-2 bg-[#0A0A0B] text-[#FAFAF7] font-semibold text-xs uppercase tracking-wider px-5 py-3 rounded-lg w-full justify-center mt-2"
+      {/* Mobile Drawer Menu with Apple Spring Physics */}
+      <AnimatePresence>
+        {mobileMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ type: 'spring', bounce: 0, duration: 0.3 }}
+            className="md:hidden bg-[#FAFAF7]/95 backdrop-blur-lg border-b border-borderColor px-8 py-6 space-y-4 overflow-hidden"
           >
-            <Download className="w-4 h-4 text-accent" />
-            <span>DOWNLOAD RESUME (PDF)</span>
-          </a>
-        </div>
-      )}
+            {navLinks.map((link) => (
+              <Link
+                key={link.label}
+                href={link.href}
+                onClick={() => setMobileMenuOpen(false)}
+                className="block font-display font-medium text-lg text-[#0A0A0B] hover:text-accent transition-colors"
+              >
+                {link.label}
+              </Link>
+            ))}
+            <a
+              href="/Mehdi_Mechkak_AI_Engineer_CV.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => setMobileMenuOpen(false)}
+              className="inline-flex items-center gap-2 bg-[#0A0A0B] text-[#FAFAF7] font-semibold text-xs uppercase tracking-wider px-5 py-3 rounded-lg w-full justify-center mt-2 active:scale-[0.98] transition-transform"
+            >
+              <Download className="w-4 h-4 text-accent" />
+              <span>DOWNLOAD RESUME (PDF)</span>
+            </a>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </header>
   );
 }

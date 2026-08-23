@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
+import { motion } from 'framer-motion';
 import { ArrowRight, ExternalLink, Globe } from 'lucide-react';
 import { Project } from '@/lib/projects-data';
 
@@ -10,7 +11,12 @@ export default function CaseStudyCard({ project, index }: { project: Project; in
   const mainThumbnail = project.screenshots[0]?.url || '/project-screenshots/polylingual-1.png';
 
   return (
-    <article className="group bg-surface border border-borderColor rounded-2xl p-6 sm:p-8 flex flex-col justify-between hover:border-borderColorHover transition-all duration-300 shadow-sm">
+    <motion.article
+      whileHover={{ y: -4 }}
+      whileTap={{ scale: 0.99 }}
+      transition={{ type: 'spring', stiffness: 300, damping: 25 }}
+      className="group bg-surface border border-borderColor rounded-2xl p-6 sm:p-8 flex flex-col justify-between hover:border-borderColorHover transition-colors shadow-sm"
+    >
       <div>
         {/* Card Header: Chapter marker & Category */}
         <div className="flex items-center justify-between gap-4 pb-6 border-b border-borderColor font-mono text-xs text-textMuted">
@@ -89,6 +95,6 @@ export default function CaseStudyCard({ project, index }: { project: Project; in
           <ArrowRight className="w-4 h-4 text-accent group-hover/link:translate-x-1 transition-transform" />
         </Link>
       </div>
-    </article>
+    </motion.article>
   );
 }
