@@ -26,6 +26,7 @@ export const DESIGN_TOKENS = {
   },
   navLinks: [
     { label: 'Work', href: '/#work' },
+    { label: 'Demos', href: '/demos' },
     { label: 'Lab', href: '/#lab' },
     { label: 'Journey', href: '/#journey' },
     { label: 'About', href: '/#about' },
