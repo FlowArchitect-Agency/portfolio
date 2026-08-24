@@ -7,7 +7,9 @@ import MetricCounter from '@/components/ui/MetricCounter';
 import IphoneMockup from '@/components/ui/iPhoneMockup';
 import ScrollReveal from '@/components/ui/ScrollReveal';
 import MagneticButton from '@/components/ui/MagneticButton';
-import { ArrowLeft, ExternalLink, Github, CheckCircle2, Layers } from 'lucide-react';
+import StudioPulseDemo from '@/components/demos/StudioPulseDemo';
+import CreatorFlowDemo from '@/components/demos/CreatorFlowDemo';
+import { ArrowLeft, ExternalLink, Github, CheckCircle2, Layers, Sparkles } from 'lucide-react';
 
 export function generateStaticParams() {
   return PROJECTS.map((project) => ({
@@ -107,6 +109,32 @@ export default function CaseStudyPage({ params }: { params: { slug: string } }) 
               Test the Grounded Support Agent Live
             </h2>
             <IphoneMockup demoUrl={project.liveDemoUrl} title={project.title} />
+          </section>
+        </ScrollReveal>
+      )}
+
+      {/* SPECIAL SHOWCASE: Live Interactive StudioPulse Experience */}
+      {project.slug === 'studiopulse-design-system' && (
+        <ScrollReveal delay={0.2}>
+          <section className="bg-surface border border-borderColor rounded-3xl p-6 sm:p-10 space-y-6 shadow-sm">
+            <div className="flex items-center gap-2 font-mono text-xs text-accent uppercase tracking-widest font-tnum pb-4 border-b border-borderColor">
+              <Sparkles className="w-4 h-4" />
+              <span>LIVE EMBEDDED DEMO // INTERACTIVE STUDIOPULSE SYSTEM</span>
+            </div>
+            <StudioPulseDemo />
+          </section>
+        </ScrollReveal>
+      )}
+
+      {/* SPECIAL SHOWCASE: Live Interactive CreatorFlow Studio */}
+      {project.slug === 'creatorflow-growth-engine' && (
+        <ScrollReveal delay={0.2}>
+          <section className="bg-surface border border-borderColor rounded-3xl p-6 sm:p-10 space-y-6 shadow-sm">
+            <div className="flex items-center gap-2 font-mono text-xs text-accent uppercase tracking-widest font-tnum pb-4 border-b border-borderColor">
+              <Sparkles className="w-4 h-4" />
+              <span>LIVE EMBEDDED DEMO // INTERACTIVE CREATORFLOW STUDIO</span>
+            </div>
+            <CreatorFlowDemo />
           </section>
         </ScrollReveal>
       )}

@@ -293,8 +293,8 @@ export const PROJECTS: Project[] = [
       { value: 'Zero', label: 'Unsanctioned Runs', subtext: 'Strict feature-flagged live execution' },
     ],
     screenshots: [
-      { url: '/project-screenshots/project3-1.png', caption: 'Nexus Control Room 3-Panel Main Studio' },
       { url: '/project-screenshots/project3-2.png', caption: 'AI Workflow Node Map Visualizer & Inspector' },
+      { url: '/project-screenshots/project3-1.png', caption: 'Nexus Control Room 3-Panel Main Studio' },
       { url: '/project-screenshots/project3-3.png', caption: 'Human Approval Gate & Risk Level Evaluation' },
       { url: '/project-screenshots/project3-4.png', caption: 'System Telemetry & Persisted Execution Audit Logs' },
     ],
@@ -327,8 +327,8 @@ export const PROJECTS: Project[] = [
         content:
           'Tested client-side state tracking versus server-validated Prisma state transitions.',
         artifacts: [
-          { imageUrl: '/project-screenshots/project3-1.png', caption: 'Artifact 01: Studio Canvas' },
-          { imageUrl: '/project-screenshots/project3-2.png', caption: 'Artifact 02: Visual Node Graph' },
+          { imageUrl: '/project-screenshots/project3-2.png', caption: 'Artifact 01: Visual Node Graph Visualizer' },
+          { imageUrl: '/project-screenshots/project3-1.png', caption: 'Artifact 02: 3-Panel Studio Canvas' },
         ],
       },
       {
@@ -519,6 +519,9 @@ export const PROJECTS: Project[] = [
         title: 'Solution highlights',
         content:
           'Transforms chaotic studio registration into a polished, Apple-grade interactive booking and marketing suite that turns Instagram followers into booked students effortlessly.',
+        artifacts: [
+          { imageUrl: '/project-screenshots/studiopulse-1.png', caption: 'Artifact 01: Tokenized Design System & Masterclass Schedule' },
+        ],
       },
       {
         id: 'the-problem',
@@ -533,6 +536,9 @@ export const PROJECTS: Project[] = [
         title: 'The insight',
         content:
           'Combining tokenized design components with velocity-aware Apple bottom sheets removes all registration friction while elevating brand prestige.',
+        artifacts: [
+          { imageUrl: '/project-screenshots/studiopulse-2.png', caption: 'Artifact 02: Apple Fluid Bottom Sheet with 1:1 Gesture Tracking' },
+        ],
       },
       {
         id: 'architecture',
@@ -556,6 +562,9 @@ export const PROJECTS: Project[] = [
         title: 'Implementation & key milestones',
         content:
           'Engineered the weekly masterclass grid with instant category filtering, real-time spot capacity counters, and a dynamic 1080x1920 Instagram Story preview engine.',
+        artifacts: [
+          { imageUrl: '/project-screenshots/studiopulse-3.png', caption: 'Artifact 03: Automated 1080x1920 Branded Social Story Card Generator' },
+        ],
       },
       {
         id: 'edge-cases',
@@ -626,6 +635,9 @@ export const PROJECTS: Project[] = [
         title: 'Solution highlights',
         content:
           'Replaces 20+ hours of tedious video editing and social scheduling with an automated, AI-assisted production pipeline and retention hook scorer.',
+        artifacts: [
+          { imageUrl: '/project-screenshots/creatorflow-1.png', caption: 'Artifact 01: Production Batch Kanban Queue & Real-Time Status' },
+        ],
       },
       {
         id: 'the-problem',
@@ -633,6 +645,9 @@ export const PROJECTS: Project[] = [
         title: 'The problem',
         content:
           'Solo creators and high-growth brands hit a ceiling because manual video editing, subtitle timing, and cross-posting require full-time agency retainers ($3,500/mo).',
+        artifacts: [
+          { imageUrl: '/project-screenshots/creatorflow-2.png', caption: 'Artifact 02: Algorithmic 3-Second Retention Hook Scorer' },
+        ],
       },
       {
         id: 'the-insight',
@@ -647,6 +662,9 @@ export const PROJECTS: Project[] = [
         title: 'Architecture & technical decisions',
         content:
           'Built with Python, FFmpeg, and n8n webhooks connecting to an interactive Next.js studio UI. Custom LLM prompts generate platform-specific captions and hashtags.',
+        artifacts: [
+          { imageUrl: '/project-screenshots/creatorflow-3.png', caption: 'Artifact 03: Multi-Platform Automated Publishing Pipeline' },
+        ],
         codeSnippet: {
           language: 'python',
           filename: 'hook_evaluator.py',
