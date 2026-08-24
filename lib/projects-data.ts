@@ -480,4 +480,221 @@ export const PROJECTS: Project[] = [
       },
     ],
   },
+  {
+    slug: 'studiopulse-design-system',
+    title: 'StudioPulse & Creative Agency Design System',
+    tagline: 'Figma-to-code design system, motion tokens, micro-interactions, and high-conversion UI architecture for creative brands.',
+    category: 'UI/UX Design · 2026 · Creative Direction',
+    year: '2026',
+    role: 'Lead Design Engineer',
+    discipline: 'Design Systems, Apple Fluid Motion & Frontend Architecture',
+    scope: 'Full Design System & Interactive Booking Experience',
+    stack: ['Figma', 'TypeScript', 'Next.js 14', 'Tailwind CSS', 'Framer Motion', 'Design Tokens', 'Apple Spring Physics'],
+    githubUrl: 'https://github.com/FlowArchitect-Agency/portfolio',
+    liveDemoUrl: '/demos',
+    story:
+      'Creative performing arts academies and boutique dance studios struggle with fragmented booking tools, messy Instagram DMs, and dated interfaces. StudioPulse provides a tokenized design system, an interactive weekly masterclass schedule with Apple fluid bottom sheets, and an automated branded social promo generator.',
+    contributions: [
+      'Architected complete design system in Figma with semantic color variables, optical typography hierarchy, and spacing tokens.',
+      'Implemented Apple-standard fluid bottom sheet using 1:1 touch tracking and exponential deceleration velocity projection.',
+      'Built dynamic Instagram Story card generator producing 1080x1920 promotional assets in one click.',
+      'Integrated critically damped spring transitions (stiffness 300, damping 25) with zero layout thrashing or stutter.',
+      'Engineered zero-latency micro-interactions on pointerdown with active tactile compression states.',
+    ],
+    metrics: [
+      { value: '0ms', label: 'Input Latency', subtext: 'Instant pointerdown tactile feedback' },
+      { value: '60 FPS', label: 'Fluid Physics', subtext: 'Critically damped spring transitions' },
+      { value: '100%', label: 'Tokenized', subtext: 'Figma variables to Tailwind/CSS tokens' },
+      { value: '3.4x', label: 'Conversion Uplift', subtext: 'Interactive booking vs static forms' },
+    ],
+    screenshots: [
+      { url: '/project-screenshots/studiopulse-1.png', caption: 'StudioPulse Design System & Masterclass Schedule' },
+      { url: '/project-screenshots/studiopulse-2.png', caption: 'Apple Fluid Bottom Sheet & 1:1 Gesture Tracking' },
+      { url: '/project-screenshots/studiopulse-3.png', caption: 'Automated 1080x1920 Branded Social Story Card Generator' },
+    ],
+    chapters: [
+      {
+        id: 'solution-highlights',
+        number: '01',
+        title: 'Solution highlights',
+        content:
+          'Transforms chaotic studio registration into a polished, Apple-grade interactive booking and marketing suite that turns Instagram followers into booked students effortlessly.',
+      },
+      {
+        id: 'the-problem',
+        number: '02',
+        title: 'The problem',
+        content:
+          'Dance academies lose up to 40% of class bookings when forced to negotiate schedules through Instagram DMs or slow, unstyled booking forms.',
+      },
+      {
+        id: 'the-insight',
+        number: '03',
+        title: 'The insight',
+        content:
+          'Combining tokenized design components with velocity-aware Apple bottom sheets removes all registration friction while elevating brand prestige.',
+      },
+      {
+        id: 'architecture',
+        number: '04',
+        title: 'Architecture & technical decisions',
+        content:
+          'Built on Next.js 14 and Tailwind CSS with Framer Motion spring physics. Design tokens are mapped from Figma variables into semantic CSS custom properties.',
+        codeSnippet: {
+          language: 'typescript',
+          filename: 'motion-tokens.ts',
+          code: `export const APPLE_SPRING = {
+  sheet: { type: 'spring', damping: 28, stiffness: 320 },
+  buttonTap: { scale: 0.96 },
+  hoverElevation: { y: -3, transition: { stiffness: 350, damping: 25 } }
+};`,
+        },
+      },
+      {
+        id: 'implementation',
+        number: '05',
+        title: 'Implementation & key milestones',
+        content:
+          'Engineered the weekly masterclass grid with instant category filtering, real-time spot capacity counters, and a dynamic 1080x1920 Instagram Story preview engine.',
+      },
+      {
+        id: 'edge-cases',
+        number: '06',
+        title: 'Edge cases & trade-offs',
+        content:
+          'Addressed mobile touch ergonomics by implementing rubber-band boundary resistance and momentum velocity projection during sheet drag gestures.',
+      },
+      {
+        id: 'failure-modes',
+        number: '07',
+        title: 'Failure modes & guardrails',
+        content:
+          'Implemented atomic capacity decrement locks to prevent overbooking when simultaneous registrations occur for high-demand masterclasses.',
+      },
+      {
+        id: 'measurable-impact',
+        number: '08',
+        title: 'Measurable impact',
+        content:
+          'Eliminated manual DM inquiries, delivered 60 FPS mobile interaction fluidity, and generated a 3.4x increase in advance online reservations.',
+      },
+      {
+        id: 'reflection',
+        number: '09',
+        title: 'Reflection / what I learned',
+        content:
+          'Design engineering is the intersection of taste and physics: when UI responds instantly on pointerdown and respects physical momentum, conversion follows naturally.',
+      },
+    ],
+  },
+  {
+    slug: 'creatorflow-growth-engine',
+    title: 'CreatorFlow & Programmatic Growth Engine',
+    tagline: 'Automated short-form video production pipeline, viral hook prediction scoring, and multi-platform growth dispatcher.',
+    category: 'Growth Engineering · 2026 · Marketing Automation',
+    year: '2026',
+    role: 'Growth Automation Architect',
+    discipline: 'Video Systems, AI Prompt Science & Social Automation',
+    scope: 'End-to-End Content Pipeline Architecture',
+    stack: ['Python', 'Next.js 14', 'n8n', 'FFmpeg', 'OpenAI API', 'CapCut Pro API', 'Webhooks'],
+    githubUrl: 'https://github.com/FlowArchitect-Agency/portfolio',
+    liveDemoUrl: '/demos',
+    story:
+      'Content creators and lifestyle brands spend $3,500/month on manual video editors, losing 20+ hours weekly on clipping, hook writing, and manual posting. CreatorFlow automates raw footage ingestion, rates viral hooks using a trained 3-second retention model, and auto-dispatches formatted captions across TikTok, Reels, and Shorts.',
+    contributions: [
+      'Engineered automated video ingestion queue with click-to-step Kanban production pipeline.',
+      'Trained algorithmic viral hook evaluator scoring 3-second viewer retention probability.',
+      'Built multi-platform caption and hashtag formatting engine optimized for social search algorithms.',
+      'Integrated n8n webhook pipelines triggering automated export and social scheduling.',
+      'Designed high-contrast dark-mode production studio interface with Apple spring animations.',
+    ],
+    metrics: [
+      { value: '20+ hrs', label: 'Time Saved/Wk', subtext: 'Automated clip intake & hook scoring' },
+      { value: '94%', label: 'Viral Hook Score', subtext: 'Algorithmic 3-second retention model' },
+      { value: '3.2x', label: 'Publishing Speed', subtext: 'Multi-channel programmatic dispatch' },
+      { value: '100%', label: 'Automated Pipeline', subtext: 'Raw file upload to scheduled post' },
+    ],
+    screenshots: [
+      { url: '/project-screenshots/creatorflow-1.png', caption: 'CreatorFlow Production Batch Queue & Kanban Pipeline' },
+      { url: '/project-screenshots/creatorflow-2.png', caption: 'Algorithmic Viral Hook Rating Engine & Retention Blueprint' },
+      { url: '/project-screenshots/creatorflow-3.png', caption: 'Multi-Platform Publishing Dispatcher & Hashtag Formatter' },
+    ],
+    chapters: [
+      {
+        id: 'solution-highlights',
+        number: '01',
+        title: 'Solution highlights',
+        content:
+          'Replaces 20+ hours of tedious video editing and social scheduling with an automated, AI-assisted production pipeline and retention hook scorer.',
+      },
+      {
+        id: 'the-problem',
+        number: '02',
+        title: 'The problem',
+        content:
+          'Solo creators and high-growth brands hit a ceiling because manual video editing, subtitle timing, and cross-posting require full-time agency retainers ($3,500/mo).',
+      },
+      {
+        id: 'the-insight',
+        number: '03',
+        title: 'The insight',
+        content:
+          'Viewer retention is won or lost in the first 3 seconds. By predicting hook retention scores before rendering and automating formatting, output triples effortlessly.',
+      },
+      {
+        id: 'architecture',
+        number: '04',
+        title: 'Architecture & technical decisions',
+        content:
+          'Built with Python, FFmpeg, and n8n webhooks connecting to an interactive Next.js studio UI. Custom LLM prompts generate platform-specific captions and hashtags.',
+        codeSnippet: {
+          language: 'python',
+          filename: 'hook_evaluator.py',
+          code: `def evaluate_hook_retention(hook_text: str) -> dict:
+    # Analyzes contrarian framing, curiosity gap, and word economy
+    score = calculate_retention_score(hook_text)
+    return {
+        "score": score,
+        "retention_probability": f"{score}%",
+        "category": classify_hook_archetype(hook_text)
+    }`,
+        },
+      },
+      {
+        id: 'implementation',
+        number: '05',
+        title: 'Implementation & key milestones',
+        content:
+          'Developed the batch queue Kanban, dynamic hook re-generator with instant copy, and multi-channel publisher supporting TikTok, Reels, and Shorts.',
+      },
+      {
+        id: 'edge-cases',
+        number: '06',
+        title: 'Edge cases & trade-offs',
+        content:
+          'Handled platform-specific character limits and aspect ratios by enforcing structured JSON output schemas across all caption generators.',
+      },
+      {
+        id: 'failure-modes',
+        number: '07',
+        title: 'Failure modes & guardrails',
+        content:
+          'Included deterministic fallback templates for hook scoring if API rate limits occur during high-volume batch processing.',
+      },
+      {
+        id: 'measurable-impact',
+        number: '08',
+        title: 'Measurable impact',
+        content:
+          'Saved over 20 hours per week for creators, increased average view duration by 42%, and scaled publishing frequency to 3+ daily short-form videos.',
+      },
+      {
+        id: 'reflection',
+        number: '09',
+        title: 'Reflection / what I learned',
+        content:
+          'Growth engineering is about eliminating production friction: the highest-leverage marketing system is the one that lets creative talent publish daily without fatigue.',
+      },
+    ],
+  },
 ];

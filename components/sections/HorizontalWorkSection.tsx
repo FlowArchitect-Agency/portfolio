@@ -14,8 +14,8 @@ export default function HorizontalWorkSection() {
     target: containerRef,
   });
 
-  // Transform vertical scroll progress into horizontal translation on desktop
-  const x = useTransform(scrollYProgress, [0, 1], ['0%', '-74%']);
+  // Transform vertical scroll progress into horizontal translation on desktop (6 projects)
+  const x = useTransform(scrollYProgress, [0, 1], ['0%', '-83%']);
 
   return (
     <section id="work" className="relative bg-background border-t border-borderColor py-24 md:py-32">
@@ -33,14 +33,14 @@ export default function HorizontalWorkSection() {
               </h2>
             </div>
             <p className="font-mono text-xs text-textMuted max-w-md">
-              HORIZONTAL SCROLL SEQUENCE // Pinned viewport tracking all 4 production AI and data engineering systems.
+              HORIZONTAL SCROLL SEQUENCE // Pinned viewport tracking all 6 production AI, UI/UX design and growth engineering systems.
             </p>
           </div>
         </ScrollReveal>
       </div>
 
       {/* Desktop Viewport Pinned Horizontal Scroll Container (>1024px) */}
-      <div ref={containerRef} className="hidden lg:block h-[350vh] relative">
+      <div ref={containerRef} className="hidden lg:block h-[500vh] relative">
         <div className="sticky top-0 flex h-screen items-center overflow-hidden">
           <motion.div style={{ x }} className="flex gap-10 pl-16 pr-16">
             {PROJECTS.map((project, idx) => (
