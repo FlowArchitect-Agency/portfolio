@@ -1,6 +1,7 @@
 'use client';
 
 import { useRef } from 'react';
+import Link from 'next/link';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import CaseStudyCard from '../ui/CaseStudyCard';
 import ScrollReveal from '../ui/ScrollReveal';
@@ -32,9 +33,15 @@ export default function HorizontalWorkSection() {
                 Production Case Studies
               </h2>
             </div>
-            <p className="font-mono text-xs text-textMuted max-w-md">
-              HORIZONTAL SCROLL SEQUENCE // Pinned viewport tracking all 6 production AI, UI/UX design and growth engineering systems.
-            </p>
+            <div className="flex flex-col sm:flex-row sm:items-center gap-4">
+              <Link
+                href="/work"
+                className="inline-flex items-center gap-2 font-mono text-xs text-accent hover:underline uppercase tracking-wider font-tnum"
+              >
+                <span>VIEW CATEGORIZED DIRECTORY (06 REPOS)</span>
+                <span>&rarr;</span>
+              </Link>
+            </div>
           </div>
         </ScrollReveal>
       </div>

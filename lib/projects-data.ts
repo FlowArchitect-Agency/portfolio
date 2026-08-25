@@ -15,6 +15,54 @@ export interface ProjectChapter {
   }[];
 }
 
+export type CategoryGroupId = 'all' | 'ai-engineering' | 'design-systems' | 'growth-marketing' | 'data-engineering';
+
+export interface ProjectCategory {
+  id: CategoryGroupId;
+  label: string;
+  badge: string;
+  iconName: string;
+  description: string;
+}
+
+export const PROJECT_CATEGORIES: ProjectCategory[] = [
+  {
+    id: 'all',
+    label: 'All Work',
+    badge: '06',
+    iconName: 'Layers',
+    description: 'Complete production suite of AI architectures, tokenized design systems, and data pipelines.',
+  },
+  {
+    id: 'ai-engineering',
+    label: 'AI Systems & Engineering',
+    badge: '03',
+    iconName: 'Brain',
+    description: 'Grounded RAG, autonomous n8n workflows, and server-side state machine guardrails.',
+  },
+  {
+    id: 'design-systems',
+    label: 'UI/UX & Design Systems',
+    badge: '01',
+    iconName: 'Palette',
+    description: 'Tokenized Figma-to-code components, Apple fluid spring physics, and dynamic story generators.',
+  },
+  {
+    id: 'growth-marketing',
+    label: 'Growth & Marketing',
+    badge: '01',
+    iconName: 'TrendingUp',
+    description: 'Automated video production pipelines, viral retention hook prediction, and multi-platform publishing.',
+  },
+  {
+    id: 'data-engineering',
+    label: 'Data & ETL Pipelines',
+    badge: '01',
+    iconName: 'Database',
+    description: 'Multi-source Apache Airflow DAGs, LLM review enrichment, and PostgreSQL data marts.',
+  },
+];
+
 export interface ProjectMetric {
   value: string;
   label: string;
@@ -26,6 +74,7 @@ export interface Project {
   title: string;
   tagline: string;
   category: string;
+  categoryGroup: CategoryGroupId;
   year: string;
   role: string;
   discipline: string;
@@ -50,6 +99,7 @@ export const PROJECTS: Project[] = [
     title: 'Hotel Concierge AI (ConciergeFlow)',
     tagline: '24/7 AI concierge for Paris boutique hotels with grounded n8n workflows and Airtable integration.',
     category: 'AI agent · 2026 · Hospitality',
+    categoryGroup: 'ai-engineering',
     year: '2026',
     role: 'AI Systems Engineer',
     discipline: 'Hospitality Automation & n8n Workflows',
@@ -157,6 +207,7 @@ export const PROJECTS: Project[] = [
     title: 'Polylingual AI Support Agent',
     tagline: 'Evidence-first French/English support automation platform that escalates instead of guessing.',
     category: 'RAG · 2025 · Multilingual support automation',
+    categoryGroup: 'ai-engineering',
     year: '2025',
     role: 'Applied AI Engineer & Architect',
     discipline: 'RAG & Support Automation',
@@ -271,6 +322,7 @@ export const PROJECTS: Project[] = [
     title: 'AI Internal Tool Builder (Nexus Control Room)',
     tagline: 'Natural language workflow generator with strict server-side state machine approvals.',
     category: 'AI tooling · 2025 · Workflow automation',
+    categoryGroup: 'ai-engineering',
     year: '2025',
     role: 'Full-Stack Engineer & AI Architect',
     discipline: 'AI Tooling & Internal Automations',
@@ -378,6 +430,7 @@ export const PROJECTS: Project[] = [
     title: 'Automated BI Pipeline with AI Enrichment',
     tagline: 'Orchestrated ETL data warehouse with pandas transformations, AI enrichment, and Streamlit analytics.',
     category: 'Data · 2024 · BI / ETL',
+    categoryGroup: 'data-engineering',
     year: '2024',
     role: 'Data Engineer & AI Specialist',
     discipline: 'ETL Pipeline & Business Intelligence',
@@ -485,6 +538,7 @@ export const PROJECTS: Project[] = [
     title: 'StudioPulse & Creative Agency Design System',
     tagline: 'Figma-to-code design system, motion tokens, micro-interactions, and high-conversion UI architecture for creative brands.',
     category: 'UI/UX Design · 2026 · Creative Direction',
+    categoryGroup: 'design-systems',
     year: '2026',
     role: 'Lead Design Engineer',
     discipline: 'Design Systems, Apple Fluid Motion & Frontend Architecture',
@@ -601,6 +655,7 @@ export const PROJECTS: Project[] = [
     title: 'CreatorFlow & Programmatic Growth Engine',
     tagline: 'Automated short-form video production pipeline, viral hook prediction scoring, and multi-platform growth dispatcher.',
     category: 'Growth Engineering · 2026 · Marketing Automation',
+    categoryGroup: 'growth-marketing',
     year: '2026',
     role: 'Growth Automation Architect',
     discipline: 'Video Systems, AI Prompt Science & Social Automation',
