@@ -54,7 +54,7 @@ export default function MailerLiteApplicationPage() {
         </div>
         <h1 className="text-4xl sm:text-5xl font-extrabold tracking-tight text-gray-950 mb-6 leading-[1.15]">
           Hey MailerLite! 👋 <br />
-          I’m <span className="text-[#09C269]">Mohamed Mehdi Mechkak</span>.
+          I’m <span className="text-[#09C269]">Mehdi Mechkak</span>.
         </h1>
         <p className="text-lg sm:text-xl text-gray-600 max-w-3xl leading-relaxed mb-8">
           Applied AI Systems Engineer & Product Builder based in Paris, France. I combine a rigorous engineering background 
