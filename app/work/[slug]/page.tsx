@@ -9,7 +9,7 @@ import ScrollReveal from '@/components/ui/ScrollReveal';
 import MagneticButton from '@/components/ui/MagneticButton';
 import StudioPulseDemo from '@/components/demos/StudioPulseDemo';
 import CreatorFlowDemo from '@/components/demos/CreatorFlowDemo';
-import { ArrowLeft, ExternalLink, Github, CheckCircle2, Layers, Sparkles } from 'lucide-react';
+import { ArrowLeft, ExternalLink, Github, CheckCircle2, Layers, Sparkles, FileText } from 'lucide-react';
 
 export function generateStaticParams() {
   return PROJECTS.map((project) => ({
@@ -82,18 +82,34 @@ export default function CaseStudyPage({ params }: { params: { slug: string } }) 
                 </a>
               </MagneticButton>
             )}
-            <MagneticButton strength={0.15}>
-              <a
-                href={project.githubUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 bg-surface border border-borderColor text-textPrimary font-sans font-medium text-xs uppercase tracking-wider px-6 py-4 rounded-xl hover:border-borderColorHover transition-colors"
-              >
-                <Github className="w-4 h-4 text-accent" />
-                <span>GITHUB REPO — OPEN</span>
-                <ExternalLink className="w-3.5 h-3.5 text-textMuted" />
-              </a>
-            </MagneticButton>
+            {project.reportUrl && (
+              <MagneticButton strength={0.2}>
+                <a
+                  href={project.reportUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 bg-textPrimary text-background font-sans font-semibold text-xs uppercase tracking-wider px-6 py-4 rounded-xl hover:opacity-90 transition-opacity shadow-sm"
+                >
+                  <FileText className="w-4 h-4 text-accent" />
+                  <span>{project.reportLabel ?? 'REPORT — PDF'}</span>
+                  <ExternalLink className="w-3.5 h-3.5 text-accent" />
+                </a>
+              </MagneticButton>
+            )}
+            {project.githubUrl && (
+              <MagneticButton strength={0.15}>
+                <a
+                  href={project.githubUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 bg-surface border border-borderColor text-textPrimary font-sans font-medium text-xs uppercase tracking-wider px-6 py-4 rounded-xl hover:border-borderColorHover transition-colors"
+                >
+                  <Github className="w-4 h-4 text-accent" />
+                  <span>GITHUB REPO — OPEN</span>
+                  <ExternalLink className="w-3.5 h-3.5 text-textMuted" />
+                </a>
+              </MagneticButton>
+            )}
           </div>
         </div>
       </ScrollReveal>

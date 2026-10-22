@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
 import CaseStudyCard from '@/components/ui/CaseStudyCard';
 import { PROJECTS, PROJECT_CATEGORIES, CategoryGroupId } from '@/lib/projects-data';
-import { ArrowLeft, Layers, Brain, Palette, TrendingUp, Database, Sparkles } from 'lucide-react';
+import { ArrowLeft, Layers, Brain, Palette, TrendingUp, Database, Sparkles, Cpu } from 'lucide-react';
 
 export default function WorkIndexPage() {
   const [activeCategory, setActiveCategory] = useState<CategoryGroupId>('all');
@@ -26,6 +26,8 @@ export default function WorkIndexPage() {
         return <TrendingUp className="w-4 h-4" />;
       case 'data-engineering':
         return <Database className="w-4 h-4" />;
+      case 'hardware':
+        return <Cpu className="w-4 h-4" />;
       default:
         return <Layers className="w-4 h-4" />;
     }
@@ -57,7 +59,7 @@ export default function WorkIndexPage() {
           Production Systems &amp; Case Studies
         </h1>
         <p className="font-sans text-lg text-textSecondary leading-relaxed">
-          Comprehensive architecture breakdowns, production metrics, and technical deep dives organized across AI Systems, UI/UX Design Engineering, Growth Automation, and Data Pipelines.
+          Comprehensive architecture breakdowns, production metrics, and technical deep dives organized across Electronics &amp; Power Hardware, AI Systems, UI/UX Design Engineering, Growth Automation, and Data Pipelines.
         </p>
       </div>
 

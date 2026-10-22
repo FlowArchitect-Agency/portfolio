@@ -15,7 +15,7 @@ export interface ProjectChapter {
   }[];
 }
 
-export type CategoryGroupId = 'all' | 'ai-engineering' | 'design-systems' | 'growth-marketing' | 'data-engineering';
+export type CategoryGroupId = 'all' | 'hardware' | 'ai-engineering' | 'design-systems' | 'growth-marketing' | 'data-engineering';
 
 export interface ProjectCategory {
   id: CategoryGroupId;
@@ -29,9 +29,16 @@ export const PROJECT_CATEGORIES: ProjectCategory[] = [
   {
     id: 'all',
     label: 'All Work',
-    badge: '06',
+    badge: '08',
     iconName: 'Layers',
-    description: 'Complete production suite of AI architectures, tokenized design systems, and data pipelines.',
+    description: 'Electronics hardware, AI architectures, tokenized design systems, and data pipelines.',
+  },
+  {
+    id: 'hardware',
+    label: 'Electronics & Power Hardware',
+    badge: '02',
+    iconName: 'Cpu',
+    description: 'Analog circuit design, PCB fabrication, oscilloscope validation, and medium-voltage SiC power modules.',
   },
   {
     id: 'ai-engineering',
@@ -80,7 +87,9 @@ export interface Project {
   discipline: string;
   scope: string;
   stack: string[];
-  githubUrl: string;
+  githubUrl?: string;
+  reportUrl?: string;
+  reportLabel?: string;
   liveDemoUrl?: string;
   hasInteractivePhoneDemo?: boolean;
   story: string;
@@ -94,6 +103,241 @@ export interface Project {
 }
 
 export const PROJECTS: Project[] = [
+  {
+    slug: 'lifi-optical-receiver',
+    title: 'LiFi Optical Audio Link',
+    tagline: 'Sigma-Delta transmitter and a four-stage analog optical receiver, laid out, etched and soldered by hand, then validated stage by stage on the oscilloscope.',
+    category: 'Analog electronics · 2026 · PCB',
+    categoryGroup: 'hardware',
+    year: '2026',
+    role: 'Receiver design, PCB & validation (team of 3)',
+    discipline: 'Analog Electronics & Optical Communication',
+    scope: 'Theory → LTspice → EAGLE PCB → fabrication → oscilloscope',
+    stack: ['EAGLE (schematic + 2-layer PCB)', 'LTspice', 'BPW34 / AD817 TIA', 'LM318', 'LM311', 'LF356', 'Siglent SDS1104X-E'],
+    reportUrl: '/reports/LiFi_Optical_Link_Report_Mechkak.pdf',
+    reportLabel: 'FULL REPORT — PDF',
+    story:
+      'A Licence 3 EEA project at Université Paris-Saclay: send audio over light. The transmitter encodes the audio as the duty cycle of a self-oscillating first-order Sigma-Delta loop and switches an LED fully on or off. The receiver has to pull that ~97 kHz signal out of a photodiode current dominated by room light. The circuit topologies were given by the instructor; my part was the receiver: the analysis, the EAGLE schematic and two-layer layout, etching, drilling, soldering, debugging, and measuring every stage.',
+    contributions: [
+      'Analysed the transimpedance front end (BPW34, Rf = 22 kΩ, Cf = 10 pF) and checked the compensation capacitor against the op-amp gain-bandwidth.',
+      'Captured the receiver in EAGLE, chose footprints, placed and routed a two-layer board, and ran the DRC before fabrication.',
+      'Fabricated the board myself (UV exposure, ferric-chloride etch, drilling, soldering), then fixed shorts, cold joints and placement errors.',
+      'Validated each stage with the oscilloscope: TIA, conditioning (LM318), hysteresis comparator (LM311) and reconstruction filter (LF356).',
+      'With the team, measured the Sigma-Delta transmitter and checked its duty cycle against the charge-balance law.',
+    ],
+    metrics: [
+      { value: '86.8 kHz', label: 'Self-oscillation', subtext: 'Sigma-Delta loop at zero input' },
+      { value: '−1.09 V/V', label: 'Measured loop slope', subtext: 'vs. −1 predicted by charge balance' },
+      { value: '4', label: 'Receiver stages', subtext: 'TIA → filter → comparator → low-pass' },
+      { value: '2-layer', label: 'Home-made PCB', subtext: 'Laid out, etched and soldered by hand' },
+    ],
+    screenshots: [
+      { url: '/projects/lifi/board.jpg', caption: 'Finished receiver board under test' },
+      { url: '/projects/lifi/pcb_layout.jpg', caption: 'Two-layer EAGLE layout' },
+      { url: '/projects/lifi/comp_out.jpg', caption: 'Comparator output: clean two-level signal at ~97 kHz' },
+    ],
+    chapters: [
+      {
+        id: 'solution-highlights',
+        number: '01',
+        title: 'Solution highlights',
+        content:
+          'A complete optical audio link: the information rides on the timing of the light pulses, not their brightness, so the receiver only has to decide "on or off" and average the answers.',
+        bullets: [
+          'Transmitter: LF356 integrator + LM311N quantizer forming a first-order Sigma-Delta loop.',
+          'Receiver: photodiode TIA → LM318 conditioning → LM311 hysteresis comparator → LF356 Sallen-Key low-pass.',
+          'Full English report with equations, bench data, LTspice results and an honest limits section.',
+        ],
+      },
+      {
+        id: 'the-problem',
+        number: '02',
+        title: 'The problem',
+        content:
+          'A photodiode cannot tell an LED photon from a ceiling-light photon. The wanted signal is a small current at ~97 kHz sitting on a large DC and 50/100 Hz current from ambient light, and a larger feedback resistor amplifies both.',
+      },
+      {
+        id: 'the-insight',
+        number: '03',
+        title: 'The insight',
+        content:
+          'Separate signal from interference by frequency, not amplitude. Ambient light lives near DC, audio below 20 kHz, switching near 90 kHz. LTspice showed that a 1500 Hz disturbance ruins a direct analog link but disappears once a comparator regenerates the PWM edges before the filter.',
+        artifacts: [
+          { imageUrl: '/projects/lifi/sim_noise.jpg', caption: 'LTspice: 1500 Hz disturbance passes the RC demodulator' },
+          { imageUrl: '/projects/lifi/sim_regen.jpg', caption: 'LTspice: comparator regeneration restores the 500 Hz tone' },
+        ],
+      },
+      {
+        id: 'explorations-iterations',
+        number: '04',
+        title: 'Transmitter measurements',
+        content:
+          'At zero input the loop self-oscillates at 86.82 kHz with a 52.87 % duty cycle. A +1 V input moves it to 41.95 %, shifting the output average by −1.09 V, close to the −R4/R3 ≈ −1 predicted by charge balance. With a 1 kHz sine the edges sweep while the mean switching frequency stays at 86.13 kHz.',
+        artifacts: [
+          { imageUrl: '/projects/lifi/tx_0v.jpg', caption: 'Vin = 0 V: integrator ramps and comparator output' },
+          { imageUrl: '/projects/lifi/tx_sine.jpg', caption: '1 kHz sine input: duty cycle follows the audio' },
+        ],
+      },
+      {
+        id: 'up-close',
+        number: '05',
+        title: 'Up close: from schematic to board',
+        content:
+          'Short photodiode-to-TIA path, decoupling at every supply pin, wide power and ground tracks, 45° bends, and a DRC pass before export. The artwork was printed, UV-exposed, etched in ferric chloride, drilled and soldered in the lab.',
+        artifacts: [
+          { imageUrl: '/projects/lifi/pcb_layout.jpg', caption: 'EAGLE layout (top red, bottom blue)' },
+          { imageUrl: '/projects/lifi/pcb_print.jpg', caption: 'Printed artwork used for UV exposure' },
+        ],
+      },
+      {
+        id: 'under-the-hood',
+        number: '06',
+        title: 'Under the hood: TIA stability check',
+        content:
+          'The 72 pF photodiode capacitance at the inverting input erodes phase margin, and Cf across Rf restores it. A first-pass estimate gives about 3 pF for the AD817 on the schematic, so the 10 pF fitted is conservative, and the closed-loop bandwidth 1/(2π·Rf·Cf) ≈ 720 kHz still clears the switching rate.',
+        codeSnippet: {
+          filename: 'tia_check.py',
+          language: 'python',
+          code: `from math import pi, sqrt\nRf, Cin, Cf = 22e3, 72e-12, 10e-12\nfor name, gbw in [("AD817", 50e6), ("LF356", 5e6)]:\n    print(name, "Cf_min ~", round(sqrt(Cin / (2*pi*Rf*gbw)) * 1e12, 1), "pF")\nprint("closed-loop BW ~", round(1 / (2*pi*Rf*Cf) / 1e3), "kHz")`,
+        },
+      },
+      {
+        id: 'failure-modes',
+        number: '07',
+        title: 'Receiver validation & what went wrong',
+        content:
+          'Under constant light the TIA sat at about +2 V of ambient offset and the comparator stayed locked at about −4 V, as expected. With the ~97 kHz optical signal the comparator regenerated a clean square wave. The conditioning stage showed overshoot and ringing on rising edges; the comparator hides it, but it points to limited phase margin and is the first thing I would fix.',
+        artifacts: [
+          { imageUrl: '/projects/lifi/tia_out.jpg', caption: 'TIA output: ~1 Vpp with rounded edges' },
+          { imageUrl: '/projects/lifi/comp_out.jpg', caption: 'Comparator output: sharp edges, flat plateaus' },
+        ],
+      },
+      {
+        id: 'measurable-impact',
+        number: '08',
+        title: 'Limits',
+        content:
+          'The receiver board was validated with a fixed-duty optical signal and the transmitter separately with a 1 kHz sine. A full end-to-end audio test (distortion and SNR versus distance and room light) is the next step.',
+      },
+      {
+        id: 'reflection',
+        number: '09',
+        title: 'Reflection / what I learned',
+        content:
+          'Real circuits do not behave like ideal schematics. Ambient-light offset, the TIA phase-margin trade-off and ringing in a fast amplifier only appeared once the board existed, with its parasitics, layout and grounding. Explaining those gaps with an oscilloscope is what pushed me towards research in power electronics and EMC.',
+      },
+    ],
+  },
+  {
+    slug: 'sic-6-5kv-power-module',
+    title: '6.5 kV SiC Full-Bridge Power Module: Technical Study',
+    tagline: 'An in-depth analysis of a medium-voltage SiC MOSFET module for megawatt EV charging: packaging, parasitic inductance, switching tests and the limits the paper leaves open.',
+    category: 'Power electronics · 2026 · Paper study',
+    categoryGroup: 'hardware',
+    year: '2026',
+    role: 'Analysis & technical presentation (individual)',
+    discipline: 'Power Electronics & Packaging',
+    scope: 'Paper study · own diagrams · critical analysis',
+    stack: ['SiC MOSFETs', 'XHP3 packaging', 'ANSYS Q3D (as reported)', 'Double-pulse testing', 'Curve tracing'],
+    story:
+      'For a Master 1 SAIETI oral at Université Paris-Saclay, I studied Boutry et al., "A 6.5 kV Full-Bridge SiC MOSFET Module Design" (IWIPP 2025, University of Alabama) in depth and rebuilt its key ideas as my own diagrams: why medium-voltage applications need SiC, how a full bridge fits in an XHP3 footprint, how the module is built, and how it was tested. I then added my own critical analysis of what the results do not yet show. This is a study of published work, not hardware I built.',
+    contributions: [
+      'Redrew the topology, fabrication sequence, die-attach metallurgy, wire bonding and double-pulse test as original diagrams.',
+      'Explained why the commutation inductance curves fall with frequency (flux cancellation, skin and proximity effects).',
+      'Compared the sub-scale prototype (2.5 kV, 11 A, FR4/ABS/Al) with the full-scale target (4 kV, 40 A, AlN/PEEK/AlSiC).',
+      'Raised issues not discussed in the paper: Sn63Pb37 solder melts at 183 °C against a 175 °C die rating, and the turn-on ringing has EMI consequences.',
+      'Added an ethical, social and environmental assessment (lead in solder, energy-intensive SiC wafers, high-voltage safety).',
+    ],
+    metrics: [
+      { value: '6.5 kV', label: 'Rated voltage', subtext: 'Full bridge, XHP3 footprint (100 × 140 mm)' },
+      { value: '34.5 nH', label: 'Commutation inductance', subtext: 'vs. 20 nH target (Q3D, as reported)' },
+      { value: '< 200 V', label: 'Turn-off overshoot', subtext: 'Double pulse at 2.5 kV / 10 A' },
+      { value: '183 °C', label: 'Solder melting point', subtext: 'My flag: close to the 175 °C die rating' },
+    ],
+    screenshots: [
+      { url: '/projects/sic/slide01.jpg', caption: 'Title slide' },
+      { url: '/projects/sic/slide14.jpg', caption: 'Six fabrication steps (own exploded drawing)' },
+      { url: '/projects/sic/slide28.jpg', caption: 'Limits and open issues' },
+    ],
+    chapters: [
+      {
+        id: 'solution-highlights',
+        number: '01',
+        title: 'What the paper proposes',
+        content:
+          'Two identical half-bridge substrates in one XHP3 housing give a 6.5 kV SiC full bridge. Joining the two midpoints turns it into a half bridge with twice the current, so one module serves both topologies.',
+        artifacts: [
+          { imageUrl: '/projects/sic/slide08.jpg', caption: 'Topologies: count the midpoints (own drawing)' },
+        ],
+      },
+      {
+        id: 'the-problem',
+        number: '02',
+        title: 'The problem',
+        content:
+          'Megawatt EV charging, 3.3 kV+ rail traction and solid-state transformers need higher voltage, smaller size and higher power density. SiC (3.3 eV bandgap against 1.1 eV for silicon) blocks more voltage with lower losses, but very few packaged SiC modules exist above 3.3 kV: a bare die is not a product.',
+      },
+      {
+        id: 'explorations-iterations',
+        number: '03',
+        title: 'How it is built',
+        content:
+          'The steps are: Sn63Pb37 reflow die attach, 20-mil aluminium wire bonds, MCX gate connectors with a 5 Ω gate resistor, substrates mounted on an aluminium baseplate, copper terminals soldered in a jig, then a 3D-printed ABS housing.',
+        artifacts: [
+          { imageUrl: '/projects/sic/slide14.jpg', caption: 'Six fabrication steps (own exploded drawing)' },
+          { imageUrl: '/projects/sic/slide15.jpg', caption: 'Sn-Pb phase diagram: eutectic at 183 °C (own drawing)' },
+        ],
+      },
+      {
+        id: 'up-close',
+        number: '04',
+        title: 'Up close: parasitic inductance',
+        content:
+          'The paper reports a Q3D-extracted commutation inductance of 34.5 nH (target 20 nH) with balanced legs (45/46 nH). I explained why the curves fall with frequency: opposite currents in close plates cancel flux, and skin and proximity effects push current to the facing surfaces. Larger DC-plate overlap is the fix the authors propose.',
+        artifacts: [
+          { imageUrl: '/projects/sic/slide23.jpg', caption: 'Flux cancellation, skin and proximity effects (own drawings)' },
+          { imageUrl: '/projects/sic/slide17.jpg', caption: 'Wire bonding: 20-mil aluminium (own drawing)' },
+        ],
+      },
+      {
+        id: 'under-the-hood',
+        number: '05',
+        title: 'Under the hood: the tests',
+        content:
+          'Static: a Keysight B1505A curve tracer measured about 300 mΩ on-resistance and leakage up to 3.0 kV. Dynamic: a double-pulse test at 2.5 kV, 10 A, 5 Ω and 25 °C showed turn-off overshoot under 200 V and turn-on current ringing peaking near 44 A.',
+        artifacts: [
+          { imageUrl: '/projects/sic/slide25.jpg', caption: 'Double-pulse test sequence (own drawing)' },
+        ],
+      },
+      {
+        id: 'failure-modes',
+        number: '06',
+        title: 'Limits and open issues (my analysis)',
+        content:
+          'Several limits remain. The inductance is 34.5 nH against a 20 nH target. Strong turn-on ringing is an EMI source. The tests stop at 2.5 kV, 10 A and 25 °C, and leakage was measured only to 3.0 kV of 6.5 kV. Partial discharge is untested, the prototype uses FR4 and ABS, and the eutectic solder melts at 183 °C while the die is rated to 175 °C, which leaves little thermal margin for the full-scale module.',
+        artifacts: [
+          { imageUrl: '/projects/sic/slide28.jpg', caption: 'Limits and open issues' },
+        ],
+      },
+      {
+        id: 'measurable-impact',
+        number: '07',
+        title: 'Beyond the lab',
+        content:
+          'On the environmental side, higher efficiency and faster EV charging are gains, while lead in the solder and energy-intensive SiC wafers are costs. On the social side, faster EV adoption comes with high-voltage safety and training needs. On the ethical side, reliability, honest reporting of limits and a responsible supply chain all matter.',
+        artifacts: [
+          { imageUrl: '/projects/sic/slide29.jpg', caption: 'Ethical, social and environmental assessment (own analysis)' },
+        ],
+      },
+      {
+        id: 'reflection',
+        number: '08',
+        title: 'Reflection / what I learned',
+        content:
+          'Packaging, not the die, sets the limits at medium voltage: loop inductance, insulation and thermal margins decide whether a 6.5 kV chip becomes a usable module. This is the research area I want to work in: reliable, low-parasitic medium-voltage SiC power conversion.',
+      },
+    ],
+  },
   {
     slug: 'hotel-concierge-ai',
     title: 'Hotel Concierge AI (ConciergeFlow)',
