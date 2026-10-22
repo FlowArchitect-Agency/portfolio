@@ -37,7 +37,7 @@ export default function CaseStudyCard({ project, index }: { project: Project; in
             alt={project.title}
             fill
             sizes="(max-width: 768px) 100vw, 600px"
-            className="object-cover object-top transition-transform duration-500 group-hover/img:scale-[1.03]"
+            className="object-cover object-center transition-transform duration-500 group-hover/img:scale-[1.03]"
           />
           <div className="absolute inset-0 bg-background/20 opacity-0 group-hover/img:opacity-100 transition-opacity duration-300 flex items-center justify-center">
             <span className="bg-background/90 text-textPrimary px-4 py-2 rounded-full font-mono text-xs font-semibold flex items-center gap-2 border border-borderColor">

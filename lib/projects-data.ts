@@ -132,8 +132,8 @@ export const PROJECTS: Project[] = [
       { value: '2-layer', label: 'Home-made PCB', subtext: 'Laid out, etched and soldered by hand' },
     ],
     screenshots: [
+      { url: '/projects/lifi/pcb_layout.jpg', caption: 'Two-layer EAGLE layout of the receiver' },
       { url: '/projects/lifi/board.jpg', caption: 'Finished receiver board under test' },
-      { url: '/projects/lifi/pcb_layout.jpg', caption: 'Two-layer EAGLE layout' },
       { url: '/projects/lifi/comp_out.jpg', caption: 'Comparator output: clean two-level signal at ~97 kHz' },
     ],
     chapters: [
@@ -147,6 +147,10 @@ export const PROJECTS: Project[] = [
           'Transmitter: LF356 integrator + LM311N quantizer forming a first-order Sigma-Delta loop.',
           'Receiver: photodiode TIA (LM318) → LM318 conditioning → LM311 hysteresis comparator → LF356 Sallen-Key low-pass.',
           'Full English report with equations, bench data, LTspice results and an honest limits section.',
+        ],
+        artifacts: [
+          { imageUrl: '/projects/lifi/pcb_layout.jpg', caption: 'EAGLE two-layer layout of the receiver' },
+          { imageUrl: '/projects/lifi/board.jpg', caption: 'The fabricated board under test' },
         ],
       },
       {
@@ -185,8 +189,8 @@ export const PROJECTS: Project[] = [
         content:
           'Short photodiode-to-TIA path, decoupling at every supply pin, wide power and ground tracks, 45° bends, and a DRC pass before export. The artwork was printed, UV-exposed, etched in ferric chloride, drilled and soldered in the lab.',
         artifacts: [
-          { imageUrl: '/projects/lifi/pcb_layout.jpg', caption: 'EAGLE layout (top red, bottom blue)' },
           { imageUrl: '/projects/lifi/pcb_print.jpg', caption: 'Printed artwork used for UV exposure' },
+          { imageUrl: '/projects/lifi/etch.jpg', caption: 'Etching machine used to make the board' },
         ],
       },
       {
@@ -343,36 +347,36 @@ export const PROJECTS: Project[] = [
   },
   {
     slug: 'hotel-concierge-ai',
-    title: 'Hotel Concierge AI (ConciergeFlow)',
-    tagline: '24/7 AI concierge for Paris boutique hotels with grounded n8n workflows and Airtable integration.',
-    category: 'AI agent · 2026 · Hospitality',
+    title: 'Paris Butler: AI Concierge for Hotels',
+    tagline: 'The operating layer for modern hospitality: an AI concierge that understands guests, prepares service requests and hands over to hotel staff when it matters.',
+    category: 'AI product · 2026 · Hospitality',
     categoryGroup: 'ai-engineering',
     year: '2026',
-    role: 'AI Systems Engineer',
-    discipline: 'Hospitality Automation & n8n Workflows',
-    scope: 'Webhook & Conversational AI Engineering',
+    role: 'Founder & AI Systems Engineer',
+    discipline: 'Hospitality AI & Workflow Automation',
+    scope: 'Product, conversational AI, staff handoff, website',
     stack: ['JavaScript', 'Cloudflare Workers', 'n8n', 'Airtable', 'HTML5 / CSS3', 'pytest / Python Harness'],
     githubUrl: 'https://github.com/FlowArchitect-Agency/hotel-concierge-ai',
-    liveDemoUrl: 'https://flowarchitect-agency.github.io/hotel-concierge-ai/#demo',
+    liveDemoUrl: 'https://parisbutler.com/',
     story:
-      'Boutique hotels in Paris miss late-night booking inquiries and spa upsell opportunities from international guests due to front-desk staffing limits. ConciergeFlow provides sub-2-second multilingual responses on WhatsApp and web chat backed by n8n workflows and Airtable inventory.',
+      "Hotel guests write at any hour, in their own language, about transfers, dinners, spa treatments and special occasions, and front desks cannot always answer at once. Paris Butler is an AI concierge platform that follows the guest from pre-arrival to checkout. It reads each message together with the guest's stay, answers the way the hotel would, prepares a structured service request, and passes anything that needs judgement or confirmation to staff with a short brief. It answers only from information the hotel has verified, and never presents unconfirmed availability as confirmed.",
     contributions: [
-      'Designed luxury web chat widget and responsive landing interface for Paris boutique hotel clients.',
-      'Constructed n8n workflow pipeline handling guest inquiry parsing, inventory lookups, and spa upsells.',
-      'Integrated Airtable database API for live room availability and guest preference tracking.',
-      'Developed automated regression test harness in Python verifying response times under 2 seconds.',
-      'Implemented Cloudflare Worker edge proxy routing webhooks reliably.',
+      'Designed and built the product and the parisbutler.com site, including a live demo concierge for a sample property ("Hôtel Lumière Paris").',
+      'Built the conversation flow that turns a guest message into intent, timing, guest count and preferences, then into a prepared service request.',
+      'Designed the human-handoff brief so reception can take over or assign a conversation with full context.',
+      'Connected the concierge to n8n workflows and an Airtable knowledge base, with a Cloudflare Worker routing webhooks.',
+      'Wrote a Python regression harness that checks response time and answer quality on every deploy.',
     ],
     metrics: [
-      { value: '<2.0s', label: 'Response Time', subtext: 'Sub-2-second multilingual answers' },
-      { value: '24/7', label: 'Availability', subtext: 'Capturing late-night international leads' },
-      { value: '100%', label: 'Grounded Answers', subtext: 'Verified against Airtable inventory' },
-      { value: 'n8n', label: 'Workflow Engine', subtext: 'Automated regression test suite' },
+      { value: '24/7', label: 'Availability', subtext: 'Night requests captured for the morning team' },
+      { value: 'EN · FR · ES', label: 'Languages', subtext: 'Guests answered in their own language' },
+      { value: 'Human', label: 'Handoff', subtext: 'Staff confirm anything that needs judgement' },
+      { value: '<2s', label: 'Tested response', subtext: 'Asserted by the regression harness' },
     ],
     screenshots: [
-      { url: '/project-screenshots/hotel-1.png', caption: 'ConciergeFlow Luxury Hero & Mobile Chat Preview' },
-      { url: '/project-screenshots/hotel-2.png', caption: 'Paris Boutique Hotel Value Proposition & Feature Cards' },
-      { url: '/project-screenshots/hotel-3.png', caption: 'Interactive Multilingual AI Concierge Chat Experience' },
+      { url: '/projects/parisbutler/hero.jpg', caption: 'parisbutler.com: "Every guest. Already understood."' },
+      { url: '/projects/parisbutler/operations.jpg', caption: 'Operational view: guest conversation, intent and prepared service action' },
+      { url: '/projects/parisbutler/handoff.jpg', caption: 'Human handoff brief for reception' },
     ],
     chapters: [
       {
@@ -380,31 +384,39 @@ export const PROJECTS: Project[] = [
         number: '01',
         title: 'Solution highlights',
         content:
-          'Delivers instant, elegant multilingual guest support for Paris luxury boutique hotels without front-desk overhead.',
+          'One guest conversation becomes context the hotel can act on: guest context, request understanding, service coordination and staff handoff, across web and WhatsApp.',
+        artifacts: [
+          { imageUrl: '/projects/parisbutler/hero.jpg', caption: 'Landing page' },
+          { imageUrl: '/projects/parisbutler/operations.jpg', caption: 'Operational view of a guest request' },
+        ],
       },
       {
         id: 'the-problem',
         number: '02',
         title: 'The problem',
         content:
-          'International guests booking from different timezones often abandon inquiries if front-desk staff cannot reply immediately.',
+          "Guests don't keep office hours. A late landing at CDG, an anniversary dinner or a 3 a.m. spa question often reaches a quiet front desk, and requests get lost between shifts.",
       },
       {
         id: 'the-insight',
         number: '03',
         title: 'The insight',
         content:
-          'Combining a high-end luxury UI aesthetic with deterministic n8n Airtable lookups creates a seamless VIP experience.',
+          'The concierge should assist the hotel, not impersonate it. It answers what the hotel has verified, asks only the question that matters (a flight number, a time), prepares the request, and leaves confirmation to staff.',
+        artifacts: [
+          { imageUrl: '/projects/parisbutler/prearrival.jpg', caption: 'Pre-arrival: an anniversary dinner request prepared for the team' },
+          { imageUrl: '/projects/parisbutler/handoff.jpg', caption: 'AI when it can, people when it matters' },
+        ],
       },
       {
         id: 'explorations-iterations',
         number: '04',
-        title: 'Explorations & iterations',
+        title: 'Night operations',
         content:
-          'Iterated through direct webhook integrations to n8n visual flow nodes.',
+          'Overnight, Paris Butler captures each request, understands it and queues a follow-up, so the morning team starts with context instead of a pile of unread messages.',
         artifacts: [
-          { imageUrl: '/project-screenshots/hotel-1.png', caption: 'Artifact 01: Luxury Hero' },
-          { imageUrl: '/project-screenshots/hotel-3.png', caption: 'Artifact 02: Interactive Chat Widget' },
+          { imageUrl: '/projects/parisbutler/night.jpg', caption: 'A 03:14 spa request captured and queued for the morning team' },
+          { imageUrl: '/projects/parisbutler/pilot.jpg', caption: 'Working with hotels: discovery call, set-up, pilot on real guests' },
         ],
       },
       {
@@ -412,14 +424,14 @@ export const PROJECTS: Project[] = [
         number: '05',
         title: 'Up close: System design',
         content:
-          'Guest Chat Widget → Cloudflare Worker → n8n Webhook Node → Airtable API → LLM Response Synthesis → Guest Client.',
+          'Guest channel (web chat, WhatsApp) → Cloudflare Worker → n8n workflow → hotel knowledge in Airtable → response and prepared request → staff handoff when needed.',
       },
       {
         id: 'under-the-hood',
         number: '06',
         title: 'Under the hood',
         content:
-          'Python test harness verifies n8n execution output against canonical benchmark responses.',
+          'A Python test harness posts representative guest requests to the workflow and checks response time and content against reference answers.',
         codeSnippet: {
           filename: 'concierge_harness/tests.py',
           language: 'python',
@@ -431,21 +443,21 @@ export const PROJECTS: Project[] = [
         number: '07',
         title: 'Failure modes & guardrails',
         content:
-          'Unrecognized booking queries automatically alert the front-desk duty manager via Airtable notification.',
+          'Reservations stay hotel-controlled, unconfirmed availability is never shown as confirmed, and requests the concierge cannot answer from verified information go to staff with a summary.',
       },
       {
         id: 'measurable-impact',
         number: '08',
-        title: 'Measurable impact',
+        title: 'Working with hotels',
         content:
-          'Captured late-night reservation requests and increased spa upsell conversion rates for hotel partners.',
+          'Each hotel starts with a discovery call and a focused pilot on its own website. Conversations are reviewed together, tracking requests handled, response times and service revenue.',
       },
       {
         id: 'reflection',
         number: '09',
         title: 'Reflection / what I learned',
         content:
-          'High-touch industries like luxury hospitality require ultra-fast response latencies and flawless visual presentation.',
+          'Having worked in tourism operations in Paris, I learned that hotels trust a system that knows when to stop. The handoff design matters as much as the language model.',
       },
     ],
   },

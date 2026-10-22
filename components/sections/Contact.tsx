@@ -7,7 +7,7 @@ import { Mail, Github, Linkedin, MapPin, Copy, Check, ArrowUpRight } from 'lucid
 
 export default function Contact() {
   const [copied, setCopied] = useState(false);
-  const email = 'flowarchitect.agency@gmail.com';
+  const email = 'mohamed-mehdi.mechkak@universite-paris-saclay.fr';
 
   const handleCopy = () => {
     navigator.clipboard.writeText(email);

@@ -8,14 +8,14 @@ import { Layers } from 'lucide-react';
 const MODULES_DATA: ModuleData[] = [
   {
     indexNumber: '01',
-    title: 'Hotel Concierge AI',
+    title: 'Paris Butler: AI Hotel Concierge',
     idCode: 'CONCIERGE-MULTI-A01',
     status: 'ACTIVE',
     manifesto: 'Grounded answers, tested automatically, every release.',
     stack: ['JavaScript', 'n8n', 'Airtable', 'Cloudflare Workers'],
     githubUrl: 'https://github.com/FlowArchitect-Agency/hotel-concierge-ai',
-    liveDemoUrl: 'https://flowarchitect-agency.github.io/hotel-concierge-ai/#demo',
-    imagePath: '/projects/concierge.png',
+    liveDemoUrl: 'https://parisbutler.com/',
+    imagePath: '/projects/parisbutler/hero.jpg',
   },
   {
     indexNumber: '02',

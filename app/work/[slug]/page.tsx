@@ -288,13 +288,13 @@ export default function CaseStudyPage({ params }: { params: { slug: string } }) 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-8 my-8">
                     {ch.artifacts.map((art, idx) => (
                       <div key={idx} className="space-y-3">
-                        <div className="relative w-full h-[280px] rounded-2xl overflow-hidden bg-surface border border-borderColor shadow-sm">
+                        <div className="relative w-full aspect-[16/10] rounded-2xl overflow-hidden bg-surface border border-borderColor shadow-sm">
                           <Image
                             src={art.imageUrl}
                             alt={art.caption}
                             fill
                             sizes="(max-width: 768px) 100vw, 500px"
-                            className="object-cover object-top"
+                            className="object-contain object-center p-2"
                           />
                         </div>
                         <p className="font-mono text-xs text-textMuted text-center">

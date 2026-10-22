@@ -161,7 +161,7 @@ export default function DemosPage() {
 
         <div className="flex flex-wrap items-center gap-4 shrink-0 font-sans">
           <a
-            href="mailto:mehdimechkak2025@gmail.com"
+            href="mailto:mohamed-mehdi.mechkak@universite-paris-saclay.fr"
             className="inline-flex items-center gap-2 bg-textPrimary text-background font-semibold text-xs uppercase tracking-wider px-6 py-3.5 rounded-xl hover:opacity-90 transition-opacity shadow-sm"
           >
             <Mail className="w-4 h-4 text-accent" />

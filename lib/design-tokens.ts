@@ -40,7 +40,7 @@ export const DESIGN_TOKENS = {
     location: 'Paris, France · CET',
     bioPOV:
       'I build AI systems that show their work. Every answer is grounded in retrievable evidence or the case is escalated — no black boxes, no hallucinated numbers, just accountable AI teams can trust and defend.',
-    email: 'flowarchitect.agency@gmail.com',
+    email: 'mohamed-mehdi.mechkak@universite-paris-saclay.fr',
     github: 'https://github.com/FlowArchitect-Agency',
     linkedin: 'https://linkedin.com/in/mehdi-mechkak',
     emojiStats: [
