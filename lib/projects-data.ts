@@ -239,14 +239,17 @@ export const PROJECTS: Project[] = [
     discipline: 'Power Electronics & Packaging',
     scope: 'Paper study · own diagrams · critical analysis',
     stack: ['SiC MOSFETs', 'XHP3 packaging', 'ANSYS Q3D (as reported)', 'Double-pulse testing', 'Curve tracing'],
+    reportUrl: '/reports/SiC_6.5kV_FullBridge_Study_Mechkak.pdf',
+    reportLabel: 'STUDY REPORT — PDF',
     story:
-      'For a Master 1 SAIETI oral at Université Paris-Saclay, I studied Boutry et al., "A 6.5 kV Full-Bridge SiC MOSFET Module Design" (IWIPP 2025, University of Alabama) in depth and rebuilt its key ideas as my own diagrams: why medium-voltage applications need SiC, how a full bridge fits in an XHP3 footprint, how the module is built, and how it was tested. I then added my own critical analysis of what the results do not yet show. This is a study of published work, not hardware I built.',
+      'For a Master 1 SAIETI oral at Université Paris-Saclay, I studied Boutry et al., "A 6.5 kV Full-Bridge SiC MOSFET Module Design" (IWIPP 2025, University of Alabama) in depth and rebuilt its key ideas as my own diagrams: why medium-voltage applications need SiC, how a full bridge fits in an XHP3 footprint, how the module is built, and how it was tested. I then added my own critical analysis of what the results do not yet show, with first-order calculations and a simulation plan I intend to carry out. This is a study of published work, not hardware I built.',
     contributions: [
       'Redrew the topology, fabrication sequence, die-attach metallurgy, wire bonding and double-pulse test as original diagrams.',
       'Explained why the commutation inductance curves fall with frequency (flux cancellation, skin and proximity effects).',
       'Compared the sub-scale prototype (2.5 kV, 11 A, FR4/ABS/Al) with the full-scale target (4 kV, 40 A, AlN/PEEK/AlSiC).',
       'Raised issues not discussed in the paper: Sn63Pb37 solder melts at 183 °C against a 175 °C die rating, and the turn-on ringing has EMI consequences.',
       'Added an ethical, social and environmental assessment (lead in solder, energy-intensive SiC wafers, high-voltage safety).',
+      'Bounded the turn-off di/dt from the reported overshoot (ΔV ≈ L·di/dt gives under ~5.8 A/ns) and planned an LTspice double-pulse study of loop inductance and gate resistance.',
     ],
     metrics: [
       { value: '6.5 kV', label: 'Rated voltage', subtext: 'Full bridge, XHP3 footprint (100 × 140 mm)' },
