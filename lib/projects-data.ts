@@ -113,7 +113,7 @@ export const PROJECTS: Project[] = [
     role: 'Receiver design, PCB & validation (team of 3)',
     discipline: 'Analog Electronics & Optical Communication',
     scope: 'Theory → LTspice → EAGLE PCB → fabrication → oscilloscope',
-    stack: ['EAGLE (schematic + 2-layer PCB)', 'LTspice', 'BPW34 / AD817 TIA', 'LM318', 'LM311', 'LF356', 'Siglent SDS1104X-E'],
+    stack: ['EAGLE (schematic + 2-layer PCB)', 'LTspice', 'BPW34 photodiode', 'LM318', 'LM311', 'LF356', 'Siglent SDS1104X-E'],
     reportUrl: '/reports/LiFi_Optical_Link_Report_Mechkak.pdf',
     reportLabel: 'FULL REPORT — PDF',
     story:
@@ -145,7 +145,7 @@ export const PROJECTS: Project[] = [
           'A complete optical audio link: the information rides on the timing of the light pulses, not their brightness, so the receiver only has to decide "on or off" and average the answers.',
         bullets: [
           'Transmitter: LF356 integrator + LM311N quantizer forming a first-order Sigma-Delta loop.',
-          'Receiver: photodiode TIA → LM318 conditioning → LM311 hysteresis comparator → LF356 Sallen-Key low-pass.',
+          'Receiver: photodiode TIA (LM318) → LM318 conditioning → LM311 hysteresis comparator → LF356 Sallen-Key low-pass.',
           'Full English report with equations, bench data, LTspice results and an honest limits section.',
         ],
       },
@@ -194,11 +194,11 @@ export const PROJECTS: Project[] = [
         number: '06',
         title: 'Under the hood: TIA stability check',
         content:
-          'The 72 pF photodiode capacitance at the inverting input erodes phase margin, and Cf across Rf restores it. A first-pass estimate gives about 3 pF for the AD817 on the schematic, so the 10 pF fitted is conservative, and the closed-loop bandwidth 1/(2π·Rf·Cf) ≈ 720 kHz still clears the switching rate.',
+          'The 72 pF photodiode capacitance at the inverting input erodes phase margin, and Cf across Rf restores it. A first-pass estimate gives about 6 pF for the LM318 used on the final board, so the 10 pF fitted is conservative, and the closed-loop bandwidth 1/(2π·Rf·Cf) ≈ 720 kHz still clears the switching rate.',
         codeSnippet: {
           filename: 'tia_check.py',
           language: 'python',
-          code: `from math import pi, sqrt\nRf, Cin, Cf = 22e3, 72e-12, 10e-12\nfor name, gbw in [("AD817", 50e6), ("LF356", 5e6)]:\n    print(name, "Cf_min ~", round(sqrt(Cin / (2*pi*Rf*gbw)) * 1e12, 1), "pF")\nprint("closed-loop BW ~", round(1 / (2*pi*Rf*Cf) / 1e3), "kHz")`,
+          code: `from math import pi, sqrt\nRf, Cin, Cf = 22e3, 72e-12, 10e-12\nfor name, gbw in [("LM318", 15e6), ("LF356", 5e6)]:\n    print(name, "Cf_min ~", round(sqrt(Cin / (2*pi*Rf*gbw)) * 1e12, 1), "pF")\nprint("closed-loop BW ~", round(1 / (2*pi*Rf*Cf) / 1e3), "kHz")`,
         },
       },
       {
